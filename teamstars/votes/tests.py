@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 
 class VoteTestCase(TestCase):
+    """Test case for checking the voting mechanism"""
+
     TEST_TITLE = "Test title"
     TEST_DESCRIPTION = "Test description"
 
@@ -53,3 +55,37 @@ class VoteTestCase(TestCase):
                          "Sender username doesn't match")
         self.assertEqual("user2", vote.recipient.username,
                          "Recipient username doesn't match")
+
+    def test_leaderboard(self):
+        """Asking for a leaderboard after a vote should return with the
+        correct results"""
+        user1 = User.objects.create_user(username="user1")
+        user2 = User.objects.create_user(username="user2")
+        vote_type = VoteType.objects.create(type="+")
+
+        Vote.objects.create(sender=user1, recipient=user2,
+                            type=vote_type,
+                            title=self.TEST_TITLE,
+                            description=self.TEST_DESCRIPTION)
+        leaderboard = Vote.leaderboard()
+        self.assertTrue(type(leaderboard) is list,
+                        "Vote.leaderboard() should return a list")
+        self.assertListEqual(leaderboard, [(user1, 2), (user2, 10)],
+                             "The points are not calculated correctly after "
+                             "the first vote")
+
+        Vote.objects.create(sender=user1, recipient=user2,
+                            type=vote_type,
+                            title=self.TEST_TITLE,
+                            description=self.TEST_DESCRIPTION)
+        self.assertListEqual(leaderboard, [(user1, 4), (user2, 20)],
+                             "The points are not calculated correctly after "
+                             "the second vote")
+
+        Vote.objects.create(sender=user2, recipient=user1,
+                            type=vote_type,
+                            title=self.TEST_TITLE,
+                            description=self.TEST_DESCRIPTION)
+        self.assertListEqual(leaderboard, [(user1, 14), (user2, 22)],
+                             "The points are not calculated correctly after "
+                             "the third (reverse) vote")
