@@ -4,12 +4,17 @@ from operator import itemgetter
 from django.db import models
 from django.db.models import Count
 from django.contrib.auth.models import User
+from django.utils.encoding import python_2_unicode_compatible
 
 from model_utils.models import TimeStampedModel
 
 
+@python_2_unicode_compatible
 class VoteType(TimeStampedModel):
     type = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.type
 
 
 class VoteManager(models.Manager):
@@ -72,6 +77,7 @@ class VoteManager(models.Manager):
         return leaderboard
 
 
+@python_2_unicode_compatible
 class Vote(TimeStampedModel):
     type = models.ForeignKey(VoteType, on_delete=models.CASCADE)
     sender = models.ForeignKey(User, on_delete=models.CASCADE,
@@ -81,3 +87,9 @@ class Vote(TimeStampedModel):
     title = models.CharField(max_length=255)
     description = models.TextField()
     objects = VoteManager()
+
+    def __str__(self):
+        return "[{0:%Y-%m-%d}] {1} -> {2}: {3}".format(
+            self.created,
+            self.sender.username,
+            self.recipient.username, self.title)
