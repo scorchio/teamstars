@@ -5,11 +5,7 @@ from model_utils.models import TimeStampedModel
 
 
 class VoteType(TimeStampedModel):
-    NORMAL_POSITIVE_VOTE = 'NPV'
-    TYPES = (
-        (NORMAL_POSITIVE_VOTE, 'Normal (positive) vote'),
-    )
-    type = models.CharField(max_length=5, choices=TYPES, default=NORMAL_POSITIVE_VOTE)
+    type = models.CharField(max_length=255)
 
 
 class Vote(TimeStampedModel):
