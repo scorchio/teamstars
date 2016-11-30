@@ -5,14 +5,16 @@ from rest_framework import routers
 
 from serializers import UserViewSet, VoteViewSet, VoteTypeViewSet
 
-# Routers provide an easy way of automatically determining the URL conf.
+from api_views import LeaderboardViewSet
+
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'votes', VoteViewSet)
 router.register(r'votes-types', VoteTypeViewSet)
+router.register(r'leaderboard', LeaderboardViewSet, base_name='list')
 
-urlpatterns = patterns('',
-                       url(r'^admin/', include(admin.site.urls)),
-                       url(r'^api/', include(router.urls)),
-                       url(r'^api-auth/', include('rest_framework.urls')),
-                       )
+urlpatterns = [
+   url(r'^admin/', include(admin.site.urls)),
+   url(r'^api/', include(router.urls)),
+   url(r'^api-auth/', include('rest_framework.urls')),
+]

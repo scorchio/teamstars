@@ -39,3 +39,16 @@ class VoteTypeSerializer(serializers.HyperlinkedModelSerializer):
 class VoteTypeViewSet(viewsets.ModelViewSet):
     queryset = VoteType.objects.all()
     serializer_class = VoteTypeSerializer
+
+
+class LeaderboardSerializer(serializers.Serializer):
+    user_id = serializers.IntegerField(read_only=True)
+    username = serializers.CharField(read_only=True)
+    points = serializers.IntegerField(read_only=True)
+
+    def create(self, validated_data):
+        pass
+
+    def update(self, instance, validated_data):
+        pass
+
