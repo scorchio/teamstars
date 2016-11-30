@@ -67,10 +67,14 @@ class VoteTestCase(TestCase):
                             type=vote_type,
                             title=self.TEST_TITLE,
                             description=self.TEST_DESCRIPTION)
-        leaderboard = Vote.leaderboard()
+        leaderboard = Vote.objects.leaderboard()
         self.assertTrue(type(leaderboard) is list,
                         "Vote.leaderboard() should return a list")
-        self.assertListEqual(leaderboard, [(user1, 2), (user2, 10)],
+        self.assertListEqual(leaderboard,
+                             [{"user_id": user2.id, "username":
+                                 user2.username, "points": 10},
+                              {"user_id": user1.id, "username":
+                                  user1.username, "points": 2}],
                              "The points are not calculated correctly after "
                              "the first vote")
 
@@ -78,7 +82,12 @@ class VoteTestCase(TestCase):
                             type=vote_type,
                             title=self.TEST_TITLE,
                             description=self.TEST_DESCRIPTION)
-        self.assertListEqual(leaderboard, [(user1, 4), (user2, 20)],
+        leaderboard = Vote.objects.leaderboard()
+        self.assertListEqual(leaderboard,
+                             [{"user_id": user2.id, "username":
+                                 user2.username, "points": 20},
+                              {"user_id": user1.id, "username":
+                                  user1.username, "points": 4}],
                              "The points are not calculated correctly after "
                              "the second vote")
 
@@ -86,6 +95,11 @@ class VoteTestCase(TestCase):
                             type=vote_type,
                             title=self.TEST_TITLE,
                             description=self.TEST_DESCRIPTION)
-        self.assertListEqual(leaderboard, [(user1, 14), (user2, 22)],
+        leaderboard = Vote.objects.leaderboard()
+        self.assertListEqual(leaderboard,
+                             [{"user_id": user2.id, "username":
+                                 user2.username, "points": 22},
+                              {"user_id": user1.id, "username":
+                                  user1.username, "points": 14}],
                              "The points are not calculated correctly after "
                              "the third (reverse) vote")
