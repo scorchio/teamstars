@@ -57,8 +57,8 @@ class VoteTestCase(TestCase):
                          "Recipient username doesn't match")
 
     def test_leaderboard(self):
-        """Asking for a leaderboard after a vote should return with the
-        correct results"""
+        """Asking for a leaderboard after a vote should return the correct
+        results"""
         user1 = User.objects.create_user(username="user1")
         user2 = User.objects.create_user(username="user2")
         vote_type = VoteType.objects.create(type="+")
@@ -96,10 +96,45 @@ class VoteTestCase(TestCase):
                             title=self.TEST_TITLE,
                             description=self.TEST_DESCRIPTION)
         leaderboard = Vote.objects.leaderboard()
-        self.assertListEqual(leaderboard,
-                             [{"user_id": user2.id, "username":
+        self.assertListEqual([{"user_id": user2.id, "username":
                                  user2.username, "points": 22},
                               {"user_id": user1.id, "username":
-                                  user1.username, "points": 14}],
+                                  user1.username, "points": 14}], leaderboard,
                              "The points are not calculated correctly after "
                              "the third (reverse) vote")
+
+    def test_vote_statistics(self):
+        """Asking for the vote statistics should return the corrent results"""
+        user1 = User.objects.create_user(username="user1")
+        user2 = User.objects.create_user(username="user2")
+        vote_type = VoteType.objects.create(type="+")
+
+        Vote.objects.create(sender=user1, recipient=user2,
+                            type=vote_type,
+                            title=self.TEST_TITLE,
+                            description=self.TEST_DESCRIPTION)
+        Vote.objects.create(sender=user1, recipient=user2,
+                            type=vote_type,
+                            title=self.TEST_TITLE,
+                            description=self.TEST_DESCRIPTION)
+        Vote.objects.create(sender=user2, recipient=user1,
+                            type=vote_type,
+                            title=self.TEST_TITLE,
+                            description=self.TEST_DESCRIPTION)
+        stats = Vote.objects.vote_statistics()
+        self.assertDictEqual({
+            user1.id: {
+                "user_id": user1.id,
+                "username": user1.username,
+                "sent_count": 2,
+                "received_count": 1
+            },
+            user2.id: {
+                "user_id": user2.id,
+                "username": user2.username,
+                "sent_count": 1,
+                "received_count": 2
+            }},
+            stats,
+            "The points are not calculated correctly after the third "
+            "(reverse) vote")
