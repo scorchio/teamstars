@@ -27,30 +27,37 @@ class VoteManager(models.Manager):
     POINTS_FOR_RECEIVING = 10
 
     def vote_statistics(self):
-        sent_votes = Vote.objects.values('sender__id', 'sender__username'). \
+        sent_votes = Vote.objects.values('sender__id', 'sender__username',
+                                         'type', 'type__type'). \
             annotate(sent_count=Count('sender_id'))
         received_votes = Vote.objects.values('recipient__id',
-                                             'recipient__username'). \
+                                             'recipient__username',
+                                             'type', 'type__type'). \
             annotate(received_count=Count('recipient_id'))
         logger.info("Vote statistics queries sent: {0}".format(
             connection.queries))
 
-        sent_votes = [{
-                          "user_id": vote['sender__id'],
-                          "username": vote['sender__username'],
-                          "sent_count": vote['sent_count']
-                      } for vote in sent_votes]
-        received_votes = [{
-                              "user_id": vote['recipient__id'],
-                              "username": vote['recipient__username'],
-                              "received_count": vote['received_count']
-                          } for vote in received_votes]
+        # Get the sent and received votes together into a unified structure,
+        # which can be passed to leaderboard calculation etc.
+        votes = {
+            'sent': {vote['type']:
+                     [{
+                           "user_id": typed_vote['sender__id'],
+                           "username": typed_vote['sender__username'],
+                           "count": typed_vote['sent_count']
+                       } for typed_vote in sent_votes
+                     if typed_vote['type'] == vote['type']]
+                     for vote in sent_votes},
+            'received': {vote['type']:
+                         [{
+                               "user_id": typed_vote['recipient__id'],
+                               "username": typed_vote['recipient__username'],
+                               "count": typed_vote['received_count']
+                           } for typed_vote in received_votes
+                         if typed_vote['type'] == vote['type']]
+                         for vote in received_votes}
+                 }
 
-        # Join the two lists of dicts based on user_id
-        votes = defaultdict(dict)
-        for l in (sent_votes, received_votes):
-            for elem in l:
-                votes[elem['user_id']].update(elem)
         return votes
 
     def leaderboard(self):
