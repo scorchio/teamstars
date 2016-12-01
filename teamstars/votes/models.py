@@ -91,7 +91,8 @@ class VoteManager(models.Manager):
             leaderboard[point['id']].update({'points': point['points']})
         received_points = [{"id": result[0],
                             "username": result[1],
-                            "points": result[2]} for result in received_results]
+                            "points": result[2]}
+                           for result in received_results]
         for result in received_results:
             usernames[result[0]] = result[1]
         for point in received_points:

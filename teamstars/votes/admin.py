@@ -8,5 +8,6 @@ class VoteAdmin(admin.ModelAdmin):
     list_filter = ['created']
     search_fields = ['title']
 
+
 admin.site.register(Vote, VoteAdmin)
 admin.site.register(VoteType)

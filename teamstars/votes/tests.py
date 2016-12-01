@@ -40,7 +40,7 @@ class VoteTestCase(TestCase):
 
         with self.assertRaises(ObjectDoesNotExist,
                                msg="Did not raise exception as expected"):
-            bogus_vote_type = VoteType.objects.get(type="-")
+            VoteType.objects.get(type="-")
 
         working_vote_type = VoteType.objects.get(type="+")
 
@@ -99,12 +99,12 @@ class VoteTestCase(TestCase):
                             title=self.TEST_TITLE,
                             description=self.TEST_DESCRIPTION)
         leaderboard = Vote.objects.leaderboard()
-        self.assertListEqual([{"user_id": user2.id, "username":
-                                 user2.username, "points": 22},
-                              {"user_id": user1.id, "username":
-                                  user1.username, "points": 14}], leaderboard,
-                             "The points are not calculated correctly after "
-                             "the third (reverse) vote")
+        self.assertListEqual(
+            [{"user_id": user2.id, "username": user2.username, "points": 22},
+             {"user_id": user1.id, "username": user1.username, "points": 14}],
+            leaderboard,
+            "The points are not calculated correctly after the third "
+            "(reverse) vote")
 
     def test_leaderboard_multitype(self):
         """Asking for the leaderboard should return the correct results even
