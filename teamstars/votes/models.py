@@ -2,10 +2,12 @@ from collections import defaultdict, Counter
 from operator import itemgetter
 import logging
 
+from django.core.exceptions import ValidationError
 from django.db import models, connection
 from django.db.models import Count
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.translation import ugettext_lazy as _
 
 from model_utils.models import TimeStampedModel
 
@@ -124,3 +126,7 @@ class Vote(TimeStampedModel):
             self.created,
             self.sender.username,
             self.recipient.username, self.title)
+
+    def clean(self):
+        if self.sender_id == self.recipient_id:
+            raise ValidationError(_('A user should not send votes to himself.'))

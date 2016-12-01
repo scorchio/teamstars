@@ -1,5 +1,5 @@
 from django.test import TestCase
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from models import VoteType, Vote
 from django.contrib.auth.models import User
 
@@ -57,6 +57,20 @@ class VoteTestCase(TestCase):
                          "Sender username doesn't match")
         self.assertEqual("user2", vote.recipient.username,
                          "Recipient username doesn't match")
+
+    def test_vote_creation_same_user(self):
+        user1 = User.objects.create_user(username="user1")
+        vote_type = VoteType.objects.create(type="+", sender_points=2,
+                                            recipient_points=10)
+
+        with self.assertRaises(ValidationError,
+                               msg="A self-vote did not raise exception as "
+                                   "expected"):
+            vote = Vote(sender=user1, recipient=user1,
+                        type=vote_type,
+                        title=self.TEST_TITLE,
+                        description=self.TEST_DESCRIPTION)
+            vote.clean()
 
     def test_leaderboard(self):
         """Asking for a leaderboard after a vote should return the correct

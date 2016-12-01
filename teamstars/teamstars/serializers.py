@@ -24,6 +24,11 @@ class VoteSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('id', 'type', 'sender', 'recipient', 'title', 'description',
                   'created', 'modified')
 
+    def validate(self, data):
+        vote = Vote(**data)
+        vote.clean()
+        return data
+
 
 class VoteViewSet(viewsets.ModelViewSet):
     queryset = Vote.objects.all()
