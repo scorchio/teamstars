@@ -106,6 +106,35 @@ class VoteTestCase(TestCase):
                              "The points are not calculated correctly after "
                              "the third (reverse) vote")
 
+    def test_leaderboard_multitype(self):
+        """Asking for the leaderboard should return the correct results even
+        when multiple vote types are used."""
+        user1 = User.objects.create_user(username="user1")
+        user2 = User.objects.create_user(username="user2")
+        normal_vote_type = VoteType.objects.create(type="+", sender_points=2,
+                                                   recipient_points=10)
+        huge_vote_type = VoteType.objects.create(type="+", sender_points=2,
+                                                 recipient_points=333)
+        Vote.objects.create(sender=user1, recipient=user2,
+                            type=normal_vote_type,
+                            title=self.TEST_TITLE,
+                            description=self.TEST_DESCRIPTION)
+        Vote.objects.create(sender=user1, recipient=user2,
+                            type=normal_vote_type,
+                            title=self.TEST_TITLE,
+                            description=self.TEST_DESCRIPTION)
+        Vote.objects.create(sender=user2, recipient=user1,
+                            type=huge_vote_type,
+                            title=self.TEST_TITLE,
+                            description=self.TEST_DESCRIPTION)
+        leaderboard = Vote.objects.leaderboard()
+        self.assertListEqual([{"user_id": user1.id, "username":
+                              user1.username, "points": 337},
+                              {"user_id": user2.id, "username":
+                                  user2.username, "points": 22}], leaderboard,
+                             "The points are not calculated correctly for "
+                             "multiple vote types.")
+
     def test_vote_statistics(self):
         """Asking for the vote statistics should return the correct results"""
         user1 = User.objects.create_user(username="user1")
