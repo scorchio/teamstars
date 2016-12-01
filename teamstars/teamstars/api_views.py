@@ -8,5 +8,9 @@ from serializers import LeaderboardSerializer
 
 class LeaderboardViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     permission_classes = (IsAuthenticated,)
-    queryset = Vote.objects.leaderboard()
     serializer_class = LeaderboardSerializer
+
+    def get_queryset(self):
+        # Do not use the queryset property instead of this, as that would cache
+        # the results.
+        return Vote.objects.leaderboard()
