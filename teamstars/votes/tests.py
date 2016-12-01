@@ -127,18 +127,35 @@ class VoteTestCase(TestCase):
                             description=self.TEST_DESCRIPTION)
         stats = Vote.objects.vote_statistics()
         self.assertDictEqual({
-            user1.id: {
-                "user_id": user1.id,
-                "username": user1.username,
-                "sent_count": 2,
-                "received_count": 1
+                'received': {
+                    vote_type.id: [
+                        {
+                            'user_id': user1.id,
+                            'username': user1.username,
+                            'count': 1,
+                        },
+                        {
+                            'user_id': user2.id,
+                            'username': user2.username,
+                            'count': 2,
+                        }
+                    ]
+                },
+                'sent': {
+                    vote_type.id: [
+                        {
+                            'user_id': user1.id,
+                            'username': user1.username,
+                            'count': 2,
+                        },
+                        {
+                            'user_id': user2.id,
+                            'username': user2.username,
+                            'count': 1,
+                        }
+                    ]
+                }
             },
-            user2.id: {
-                "user_id": user2.id,
-                "username": user2.username,
-                "sent_count": 1,
-                "received_count": 2
-            }},
             stats,
             "The points are not calculated correctly after the third "
             "(reverse) vote")

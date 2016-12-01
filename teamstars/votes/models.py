@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import defaultdict, Counter
 from operator import itemgetter
 import logging
 
@@ -23,9 +23,6 @@ class VoteType(TimeStampedModel):
 
 
 class VoteManager(models.Manager):
-    POINTS_FOR_SENDING = 2
-    POINTS_FOR_RECEIVING = 10
-
     def vote_statistics(self):
         sent_votes = Vote.objects.values('sender__id', 'sender__username',
                                          'type', 'type__type'). \
@@ -62,33 +59,52 @@ class VoteManager(models.Manager):
 
     def leaderboard(self):
         """Generates leaderboard from the votes."""
-        sent_votes = Vote.objects.values('sender__id', 'sender__username').\
-            annotate(sent_count=Count('sender_id'))
-        received_votes = Vote.objects.values('recipient__id',
-                                             'recipient__username').\
-            annotate(received_count=Count('recipient_id'))
-        logger.info("Leaderboard queries sent: \n    {0}\n    {1}".format(
-            sent_votes.query, received_votes.query))
+        sent_query = "select sender_id, username, " \
+                     "count(sender_id)*sender_points " \
+                     "from votes_vote, votes_votetype, auth_user " \
+                     "where votes_vote.type_id = votes_votetype.id and " \
+                     "votes_vote.sender_id = auth_user.id " \
+                     "group by type_id, sender_id"
 
-        votes = {vote['sender__id']:{
-                        "user_id": vote['sender__id'],
-                        "username": vote['sender__username'],
-                        "points": vote['sent_count'] * self.POINTS_FOR_SENDING
-                     } for vote in sent_votes}
-        received_votes = {vote['recipient__id']:{
-                  "user_id": vote['recipient__id'],
-                  "username": vote['recipient__username'],
-                  "points": vote['received_count'] * self.POINTS_FOR_RECEIVING
-              } for vote in received_votes}
+        received_query = "select recipient_id, username, " \
+                         "count(recipient_id)*recipient_points " \
+                         "from votes_vote, votes_votetype, auth_user " \
+                         "where votes_vote.type_id = votes_votetype.id and " \
+                         "votes_vote.recipient_id = auth_user.id " \
+                         "group by type_id, recipient_id"
 
-        # Merge the two dicts, summing the points
-        for recipient_id, vote in received_votes.iteritems():
-            if recipient_id in votes:
-                votes[recipient_id]['points'] += vote['points']
-            else:
-                votes[recipient_id] = vote
+        with connection.cursor() as cursor:
+            cursor.execute(sent_query)
+            sent_results = cursor.fetchall()
+            cursor.execute(received_query)
+            received_results = cursor.fetchall()
 
-        leaderboard = sorted(votes.values(), key=itemgetter("points"),
+        # Sum the results using Counter, saving the usernames in the process
+        usernames = dict()
+        leaderboard = defaultdict(Counter)
+        sent_points = [{"id": result[0],
+                        "username": result[1],
+                        "points": result[2]} for result in sent_results]
+        for result in sent_results:
+            usernames[result[0]] = result[1]
+        for point in sent_points:
+            leaderboard[point['id']].update({'points': point['points']})
+        received_points = [{"id": result[0],
+                            "username": result[1],
+                            "points": result[2]} for result in received_results]
+        for result in received_results:
+            usernames[result[0]] = result[1]
+        for point in received_points:
+            leaderboard[point['id']].update({'points': point['points']})
+
+        # Transform the result back into a normal dict
+        leaderboard = {
+            key: {'user_id': key,
+                  'points': value['points'],
+                  'username': usernames[key]}
+            for key, value in leaderboard.iteritems()}
+
+        leaderboard = sorted(leaderboard.values(), key=itemgetter("points"),
                              reverse=True)
         return leaderboard
 
