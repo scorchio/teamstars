@@ -104,7 +104,7 @@ class VoteTestCase(TestCase):
                              "the third (reverse) vote")
 
     def test_vote_statistics(self):
-        """Asking for the vote statistics should return the corrent results"""
+        """Asking for the vote statistics should return the correct results"""
         user1 = User.objects.create_user(username="user1")
         user2 = User.objects.create_user(username="user2")
         vote_type = VoteType.objects.create(type="+")
