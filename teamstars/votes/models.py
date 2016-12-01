@@ -31,8 +31,6 @@ class VoteManager(models.Manager):
                                              'recipient__username',
                                              'type', 'type__type'). \
             annotate(received_count=Count('recipient_id'))
-        logger.info("Vote statistics queries sent: {0}".format(
-            connection.queries))
 
         # Get the sent and received votes together into a unified structure,
         # which can be passed to leaderboard calculation etc.
