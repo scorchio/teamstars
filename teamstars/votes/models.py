@@ -1,12 +1,15 @@
 from collections import defaultdict
 from operator import itemgetter
+import logging
 
-from django.db import models
+from django.db import models, connection
 from django.db.models import Count
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 
 from model_utils.models import TimeStampedModel
+
+logger = logging.getLogger('votes')
 
 
 @python_2_unicode_compatible
@@ -29,6 +32,8 @@ class VoteManager(models.Manager):
         received_votes = Vote.objects.values('recipient__id',
                                              'recipient__username'). \
             annotate(received_count=Count('recipient_id'))
+        logger.info("Vote statistics queries sent: {0}".format(
+            connection.queries))
 
         sent_votes = [{
                           "user_id": vote['sender__id'],
@@ -55,6 +60,8 @@ class VoteManager(models.Manager):
         received_votes = Vote.objects.values('recipient__id',
                                              'recipient__username').\
             annotate(received_count=Count('recipient_id'))
+        logger.info("Leaderboard queries sent: \n    {0}\n    {1}".format(
+            sent_votes.query, received_votes.query))
 
         votes = {vote['sender__id']:{
                         "user_id": vote['sender__id'],
