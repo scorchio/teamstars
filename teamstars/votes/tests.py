@@ -21,8 +21,10 @@ class VoteTestCase(TestCase):
 
     def test_vote_type_creation_delete(self):
         """Should be able to create / delete vote types"""
-        vote_type_1 = VoteType.objects.create(type="+")
-        vote_type_2 = VoteType.objects.create(type="-")
+        vote_type_1 = VoteType.objects.create(type="+", sender_points=2,
+                                              recipient_points=10)
+        vote_type_2 = VoteType.objects.create(type="-", sender_points=-10,
+                                              recipient_points=-5)
         self.assertEqual(2, VoteType.objects.count(),
                          "Couldn't create vote types")
         vote_type_1.delete()
@@ -34,7 +36,7 @@ class VoteTestCase(TestCase):
         """Should be able to create a vote"""
         user1 = User.objects.create_user(username="user1")
         user2 = User.objects.create_user(username="user2")
-        VoteType.objects.create(type="+")
+        VoteType.objects.create(type="+", sender_points=2, recipient_points=10)
 
         with self.assertRaises(ObjectDoesNotExist,
                                msg="Did not raise exception as expected"):
@@ -61,7 +63,8 @@ class VoteTestCase(TestCase):
         results"""
         user1 = User.objects.create_user(username="user1")
         user2 = User.objects.create_user(username="user2")
-        vote_type = VoteType.objects.create(type="+")
+        vote_type = VoteType.objects.create(type="+", sender_points=2,
+                                            recipient_points=10)
 
         Vote.objects.create(sender=user1, recipient=user2,
                             type=vote_type,
@@ -107,7 +110,8 @@ class VoteTestCase(TestCase):
         """Asking for the vote statistics should return the correct results"""
         user1 = User.objects.create_user(username="user1")
         user2 = User.objects.create_user(username="user2")
-        vote_type = VoteType.objects.create(type="+")
+        vote_type = VoteType.objects.create(type="+", sender_points=2,
+                                            recipient_points=10)
 
         Vote.objects.create(sender=user1, recipient=user2,
                             type=vote_type,

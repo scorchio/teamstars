@@ -12,6 +12,8 @@ from model_utils.models import TimeStampedModel
 @python_2_unicode_compatible
 class VoteType(TimeStampedModel):
     type = models.CharField(max_length=255)
+    sender_points = models.IntegerField(default=0)
+    recipient_points = models.IntegerField(default=0)
 
     def __str__(self):
         return self.type

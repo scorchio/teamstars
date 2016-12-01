@@ -33,7 +33,8 @@ class VoteViewSet(viewsets.ModelViewSet):
 class VoteTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = VoteType
-        fields = ('id', 'type', 'created', 'modified')
+        fields = ('id', 'type', 'sender_points', 'recipient_points', 'created',
+                  'modified')
 
 
 class VoteTypeViewSet(viewsets.ModelViewSet):
