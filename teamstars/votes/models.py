@@ -79,9 +79,6 @@ class VoteManager(models.Manager):
             cursor.execute(received_query)
             received_results = cursor.fetchall()
 
-        logger.info("sent: {0}".format(sent_results))
-        logger.info("received: {0}".format(received_results))
-
         # Sum the results using Counter, saving the usernames in the process
         usernames = dict()
         leaderboard = defaultdict(Counter)
