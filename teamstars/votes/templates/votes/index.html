@@ -1,0 +1,15 @@
+<h1>TeamStars</h1>
+
+<h2>Leaderboard</h2>
+
+<ol>
+{% for entry in leaderboard %}
+    <li><strong>{{ entry.username }}</strong> - {{ entry.points }}</li>
+{% endfor %}
+</ol>
+
+<h2>Vote statistics</h2>
+
+
+<h2>How to use</h2>
+Please find the API page <a href="{% url 'api-root' %}">here</a>.
