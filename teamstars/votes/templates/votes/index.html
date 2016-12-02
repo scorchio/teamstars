@@ -12,7 +12,15 @@
 </ol>
 
 <h2>Vote statistics</h2>
-
+{% for vote_type, vote_type_stat in vote_stats.sent.items %}
+    <h3>Votes sent with type "{{vote_type.1}}"</h3>
+    <ul>
+    {% for person_stat in vote_type_stat %}
+        <li><strong>{{ person_stat.username }}</strong> sent
+            {{ person_stat.count }} votes</li>
+    {% endfor %}
+    </ul>
+{% endfor %}
 
 <h2>How to use</h2>
 Please find the API page <a href="{% url 'api-root' %}">here</a>.
