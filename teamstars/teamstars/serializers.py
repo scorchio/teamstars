@@ -52,9 +52,3 @@ class LeaderboardSerializer(serializers.Serializer):
     username = serializers.CharField(read_only=True)
     points = serializers.IntegerField(read_only=True)
 
-    def create(self, validated_data):
-        pass
-
-    def update(self, instance, validated_data):
-        pass
-
