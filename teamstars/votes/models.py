@@ -37,7 +37,7 @@ class VoteManager(models.Manager):
         # Get the sent and received votes together into a unified structure,
         # which can be passed to leaderboard calculation etc.
         votes = {
-            'sent': {vote['type']:
+            'sent': {(vote['type'], vote['type__type']):
                      [{
                            "user_id": typed_vote['sender__id'],
                            "username": typed_vote['sender__username'],
@@ -45,7 +45,7 @@ class VoteManager(models.Manager):
                        } for typed_vote in sent_votes
                      if typed_vote['type'] == vote['type']]
                      for vote in sent_votes},
-            'received': {vote['type']:
+            'received': {(vote['type'], vote['type__type']):
                          [{
                                "user_id": typed_vote['recipient__id'],
                                "username": typed_vote['recipient__username'],
