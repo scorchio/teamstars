@@ -129,4 +129,5 @@ class Vote(TimeStampedModel):
 
     def clean(self):
         if self.sender_id == self.recipient_id:
-            raise ValidationError(_('A user should not send votes to himself.'))
+            raise ValidationError(
+                _('A user should not send votes to himself.'))
