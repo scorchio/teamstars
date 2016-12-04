@@ -1,0 +1,51 @@
+# TeamStars translation.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TeamStars 0.1.0\n"
+"Report-Msgid-Bugs-To: adamek.zoltan@gmail.com\n"
+"POT-Creation-Date: 2016-12-04 19:12+0100\n"
+"PO-Revision-Date: 2016-12-04 19:13+0100\n"
+"Last-Translator: Zoltán Adamek <adamek.zoltan@gmail.com>\n"
+"Language-Team: Hungarian <adamek.zoltan@gmail.com>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms:  nplurals=2; plural=n != 1;\n"
+
+#: votes/models.py:133
+msgid "A user should not send votes to himself."
+msgstr "Nem lehetséges szavazatot küldeni saját magunknak."
+
+#: votes/templates/votes/index.html:5
+msgid "TeamStars overview"
+msgstr "TeamStars áttekintés"
+
+#: votes/templates/votes/index.html:7
+msgid "Leaderboard"
+msgstr "A jelenlegi állás"
+
+#: votes/templates/votes/index.html:15
+msgid "Vote statistics"
+msgstr "Szavazati statisztikák"
+
+#: votes/templates/votes/index.html:18
+#, python-format
+msgid "Votes sent with type \"%(typename)s\""
+msgstr "\"%(typename)s\" típusú szavazatok"
+
+#: votes/templates/votes/index.html:23
+#, python-format
+msgid "<strong>%(username)s</strong> sent %(count)s votes"
+msgstr "<strong>%(username)s</strong> %(count)s szavazatot küldött"
+
+#: votes/templates/votes/index.html:29
+msgid "How to use"
+msgstr "Útmutató"
+
+#: votes/templates/votes/index.html:31
+#, python-format
+msgid "Please find the API page <a href=\"%(api_url)s\">here</a>."
+msgstr "Az API oldalt <a href=\"%(api_url)s\">itt találod</a>."

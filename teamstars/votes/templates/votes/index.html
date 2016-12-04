@@ -1,9 +1,10 @@
 {% extends 'votes/base.html' %}
+{% load i18n %}
 {% block content %}
 
-<h1>TeamStars overview</h1>
+<h1>{% trans "TeamStars overview" %}</h1>
 
-<h2>Leaderboard</h2>
+<h2>{% trans "Leaderboard" %}</h2>
 
 <ol>
 {% for entry in leaderboard %}
@@ -11,18 +12,22 @@
 {% endfor %}
 </ol>
 
-<h2>Vote statistics</h2>
+<h2>{% trans "Vote statistics" %}</h2>
 {% for vote_type, vote_type_stat in vote_stats.sent.items %}
-    <h3>Votes sent with type "{{vote_type.1}}"</h3>
+    <h3>
+        {% blocktrans with typename=vote_type.1 %}Votes sent with type "{{typename}}"{% endblocktrans %}
+    </h3>
     <ul>
     {% for person_stat in vote_type_stat %}
-        <li><strong>{{ person_stat.username }}</strong> sent
-            {{ person_stat.count }} votes</li>
+        <li>
+            {% blocktrans with username=person_stat.username count=person_stat.count %}<strong>{{ username }}</strong> sent {{ count }} votes{% endblocktrans %}
+        </li>
     {% endfor %}
     </ul>
 {% endfor %}
 
-<h2>How to use</h2>
-Please find the API page <a href="{% url 'api-root' %}">here</a>.
+<h2>{% trans "How to use" %}</h2>
+{% url 'api-root' as api_url %}
+{% blocktrans %}Please find the API page <a href="{{ api_url }}">here</a>.{% endblocktrans %}
 
 {% endblock %}
