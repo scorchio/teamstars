@@ -1,10 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
 <head>
     <title>TeamStars</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'votes/normalize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'votes/milligram.min.css' %}" />
 </head>
 
 <body>
+<div class="container">
 {% block content %}{% endblock content %}
+</div>
 </body>
 </html>

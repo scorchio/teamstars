@@ -4,27 +4,32 @@
 
 <h1>{% trans "TeamStars overview" %}</h1>
 
-<h2>{% trans "Leaderboard" %}</h2>
+<div class="row">
+    <div class="column">
+        <h2>{% trans "Leaderboard" %}</h2>
 
-<ol>
-{% for entry in leaderboard %}
-    <li><strong>{{ entry.username }}</strong> - {{ entry.points }}</li>
-{% endfor %}
-</ol>
-
-<h2>{% trans "Vote statistics" %}</h2>
-{% for vote_type, vote_type_stat in vote_stats.sent.items %}
-    <h3>
-        {% blocktrans with typename=vote_type.1 %}Votes sent with type "{{typename}}"{% endblocktrans %}
-    </h3>
-    <ul>
-    {% for person_stat in vote_type_stat %}
-        <li>
-            {% blocktrans with username=person_stat.username count=person_stat.count %}<strong>{{ username }}</strong> sent {{ count }} votes{% endblocktrans %}
-        </li>
-    {% endfor %}
-    </ul>
-{% endfor %}
+        <ol>
+        {% for entry in leaderboard %}
+            <li><strong>{{ entry.username }}</strong> - {{ entry.points }}</li>
+        {% endfor %}
+        </ol>
+    </div>
+    <div class="column">
+        <h2>{% trans "Vote statistics" %}</h2>
+        {% for vote_type, vote_type_stat in vote_stats.sent.items %}
+            <h3>
+                {% blocktrans with typename=vote_type.1 %}Votes sent with type "{{typename}}"{% endblocktrans %}
+            </h3>
+            <ul>
+            {% for person_stat in vote_type_stat %}
+                <li>
+                    {% blocktrans with username=person_stat.username count=person_stat.count %}<strong>{{ username }}</strong> sent {{ count }} votes{% endblocktrans %}
+                </li>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+    </div>
+</div>
 
 <h2>{% trans "How to use" %}</h2>
 {% url 'api-root' as api_url %}
