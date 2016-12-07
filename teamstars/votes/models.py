@@ -66,14 +66,15 @@ class VoteManager(models.Manager):
                      "from votes_vote, votes_votetype, auth_user " \
                      "where votes_vote.type_id = votes_votetype.id and " \
                      "votes_vote.sender_id = auth_user.id " \
-                     "group by type_id, sender_id, username"
+                     "group by type_id, sender_points, sender_id, username"
 
         received_query = "select recipient_id, username, " \
                          "count(recipient_id)*recipient_points " \
                          "from votes_vote, votes_votetype, auth_user " \
                          "where votes_vote.type_id = votes_votetype.id and " \
                          "votes_vote.recipient_id = auth_user.id " \
-                         "group by type_id, recipient_id, username"
+                         "group by type_id, recipient_points, " \
+                         "recipient_id, username"
 
         with connection.cursor() as cursor:
             cursor.execute(sent_query)
