@@ -49,4 +49,3 @@ class LeaderboardSerializer(serializers.Serializer):
     user_id = serializers.IntegerField(read_only=True)
     username = serializers.CharField(read_only=True)
     points = serializers.IntegerField(read_only=True)
-
