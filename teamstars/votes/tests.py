@@ -171,7 +171,7 @@ class VoteTestCase(TestCase):
         stats = Vote.objects.vote_statistics()
         self.assertDictEqual({
                 'received': {
-                    vote_type.id: [
+                    (vote_type.id, vote_type.type): [
                         {
                             'user_id': user1.id,
                             'username': user1.username,
@@ -185,7 +185,7 @@ class VoteTestCase(TestCase):
                     ]
                 },
                 'sent': {
-                    vote_type.id: [
+                    (vote_type.id, vote_type.type): [
                         {
                             'user_id': user1.id,
                             'username': user1.username,
