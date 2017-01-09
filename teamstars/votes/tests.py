@@ -64,8 +64,7 @@ class VoteTestCase(TestCase):
                                             recipient_points=10)
 
         with self.assertRaises(ValidationError,
-                               msg="A self-vote did not raise exception as "
-                                   "expected"):
+                               msg="A self-vote did not raise exception as expected"):
             vote = Vote(sender=user1, recipient=user1,
                         type=vote_type,
                         title=self.TEST_TITLE,
@@ -92,8 +91,7 @@ class VoteTestCase(TestCase):
                                  user2.username, "points": 10},
                               {"user_id": user1.id, "username":
                                   user1.username, "points": 2}],
-                             "The points are not calculated correctly after "
-                             "the first vote")
+                             "The points are not calculated correctly after the first vote")
 
         Vote.objects.create(sender=user1, recipient=user2,
                             type=vote_type,
@@ -105,8 +103,7 @@ class VoteTestCase(TestCase):
                                  user2.username, "points": 20},
                               {"user_id": user1.id, "username":
                                   user1.username, "points": 4}],
-                             "The points are not calculated correctly after "
-                             "the second vote")
+                             "The points are not calculated correctly after the second vote")
 
         Vote.objects.create(sender=user2, recipient=user1,
                             type=vote_type,
@@ -117,8 +114,7 @@ class VoteTestCase(TestCase):
             [{"user_id": user2.id, "username": user2.username, "points": 22},
              {"user_id": user1.id, "username": user1.username, "points": 14}],
             leaderboard,
-            "The points are not calculated correctly after the third "
-            "(reverse) vote")
+            "The points are not calculated correctly after the third (reverse) vote")
 
     def test_leaderboard_multitype(self):
         """Asking for the leaderboard should return the correct results even
@@ -146,8 +142,7 @@ class VoteTestCase(TestCase):
                               user1.username, "points": 337},
                               {"user_id": user2.id, "username":
                                   user2.username, "points": 22}], leaderboard,
-                             "The points are not calculated correctly for "
-                             "multiple vote types.")
+                             "The points are not calculated correctly for multiple vote types.")
 
     def test_vote_statistics(self):
         """Asking for the vote statistics should return the correct results"""
@@ -200,5 +195,4 @@ class VoteTestCase(TestCase):
                 }
             },
             stats,
-            "The points are not calculated correctly after the third "
-            "(reverse) vote")
+            "The points are not calculated correctly after the third (reverse) vote")
