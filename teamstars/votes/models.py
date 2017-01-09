@@ -4,7 +4,7 @@ import logging
 
 from django.core.exceptions import ValidationError
 from django.db import models, connection
-from django.db.models import Count
+from django.db.models import Count, F
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
@@ -60,44 +60,30 @@ class VoteManager(models.Manager):
     def leaderboard(self):
         """Generates leaderboard from the votes."""
 
-        # Rewrite this to use ORM
-        sent_query = "select sender_id, username, " \
-                     "count(sender_id)*sender_points " \
-                     "from votes_vote, votes_votetype, auth_user " \
-                     "where votes_vote.type_id = votes_votetype.id and " \
-                     "votes_vote.sender_id = auth_user.id " \
-                     "group by type_id, sender_points, sender_id, username"
+        sender_points = Vote.objects\
+            .values('type__id', 'sender__id', 'sender__username')\
+            .annotate(points=Count('sender__id') * F('type__sender_points'))
 
-        received_query = "select recipient_id, username, " \
-                         "count(recipient_id)*recipient_points " \
-                         "from votes_vote, votes_votetype, auth_user " \
-                         "where votes_vote.type_id = votes_votetype.id and " \
-                         "votes_vote.recipient_id = auth_user.id " \
-                         "group by type_id, recipient_points, " \
-                         "recipient_id, username"
-
-        with connection.cursor() as cursor:
-            cursor.execute(sent_query)
-            sent_results = cursor.fetchall()
-            cursor.execute(received_query)
-            received_results = cursor.fetchall()
+        recipient_points = Vote.objects\
+            .values('type__id', 'recipient__id', 'recipient__username') \
+            .annotate(points=Count('recipient__id') * F('type__recipient_points'))
 
         # Sum the results using Counter, saving the usernames in the process
         usernames = dict()
         leaderboard = defaultdict(Counter)
-        sent_points = [{"id": result[0],
-                        "username": result[1],
-                        "points": result[2]} for result in sent_results]
-        for result in sent_results:
-            usernames[result[0]] = result[1]
+        sent_points = [{"id": result['sender__id'],
+                        "username": result['sender__username'],
+                        "points": result['points']} for result in sender_points]
+        for result in sender_points:
+            usernames[int(result['sender__id'])] = result['sender__username']
         for point in sent_points:
             leaderboard[point['id']].update({'points': point['points']})
-        received_points = [{"id": result[0],
-                            "username": result[1],
-                            "points": result[2]}
-                           for result in received_results]
-        for result in received_results:
-            usernames[result[0]] = result[1]
+        received_points = [{"id": result['recipient__id'],
+                            "username": result['recipient__username'],
+                            "points": result['points']}
+                           for result in recipient_points]
+        for result in recipient_points:
+            usernames[int(result['recipient__id'])] = result['recipient__username']
         for point in received_points:
             leaderboard[point['id']].update({'points': point['points']})
 
