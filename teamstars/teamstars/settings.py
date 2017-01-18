@@ -20,11 +20,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '%#j#2$4u42ityk=7xtd(moy*a3v0f+4=7^ba_%&@e@84^a)_09'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'teamstars-project-dev.eu-central-1.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
