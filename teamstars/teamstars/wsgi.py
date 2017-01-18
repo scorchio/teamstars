@@ -11,6 +11,6 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 sys.path = [os.path.abspath(os.path.dirname(__file__))] + sys.path
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "teamstars.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings")
 
 application = get_wsgi_application()
