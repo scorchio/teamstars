@@ -19,6 +19,7 @@ urlpatterns = [
    url(r'^api/', include(router.urls)),
    url(r'^api-auth/', include('rest_framework.urls')),
    url(r'^votes/', include('votes.urls')),
+   url('', include('social_django.urls', namespace='social'))
 ]
 
 if settings.DEBUG:

@@ -20,11 +20,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = '%#j#2$4u42ityk=7xtd(moy*a3v0f+4=7^ba_%&@e@84^a)_09'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = [u'teamstars-project-dev.eu-central-1.elasticbeanstalk.com', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'teamstars-project-dev.eu-central-1.elasticbeanstalk.com',
+    'teamstars.local',
+    '127.0.0.1']
 
 
 # Application definition
@@ -36,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social_django',
     'votes',
     'rest_framework',
     'debug_toolbar',
@@ -131,3 +135,18 @@ LOGGING = {
         }
     }
 }
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
+SOCIAL_AUTH_FACEBOOK_KEY = '939512492850366'
+SOCIAL_AUTH_FACEBOOK_SECRET = '5f3e1def773fa23499ebdbdde55a7083'
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email, age_range'
+}
+
