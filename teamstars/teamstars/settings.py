@@ -57,6 +57,13 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'social_django.context_processors.backends',
+    'social_django.context_processors.login_redirect',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.request',
+)
+
 ROOT_URLCONF = 'teamstars.urls'
 
 WSGI_APPLICATION = 'teamstars.wsgi.application'
@@ -150,3 +157,4 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id, name, email, age_range'
 }
 
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/votes/'
