@@ -1,6 +1,7 @@
 configparser==3.5.0
 Django==1.8.17
 django-debug-toolbar==1.4
+django-dotenv==1.4.1
 django-model-utils==2.6
 djangorestframework==3.3.3
 enum34==1.1.6
