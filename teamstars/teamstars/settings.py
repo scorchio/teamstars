@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social_django',
     'votes',
+    'calendstar',
     'rest_framework',
     'debug_toolbar',
 )

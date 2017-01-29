@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TeamStars</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'calendstar/normalize.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'calendstar/milligram.min.css' %}" />
+</head>
+
+<body>
+<div class="container">
+{% block content %}{% endblock content %}
+</div>
+</body>
+</html>
