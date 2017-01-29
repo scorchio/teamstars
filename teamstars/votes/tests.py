@@ -168,28 +168,28 @@ class VoteTestCase(TestCase):
                 'received': {
                     (vote_type.id, vote_type.type): [
                         {
-                            'user_id': user1.id,
-                            'username': user1.username,
-                            'count': 1,
-                        },
-                        {
                             'user_id': user2.id,
                             'username': user2.username,
                             'count': 2,
+                        },
+                        {
+                            'user_id': user1.id,
+                            'username': user1.username,
+                            'count': 1,
                         }
                     ]
                 },
                 'sent': {
                     (vote_type.id, vote_type.type): [
                         {
-                            'user_id': user1.id,
-                            'username': user1.username,
-                            'count': 2,
-                        },
-                        {
                             'user_id': user2.id,
                             'username': user2.username,
                             'count': 1,
+                        },
+                        {
+                            'user_id': user1.id,
+                            'username': user1.username,
+                            'count': 2,
                         }
                     ]
                 }
