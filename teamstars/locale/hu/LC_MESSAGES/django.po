@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TeamStars 0.1.0\n"
-"Report-Msgid-Bugs-To: adamek.zoltan@gmail.com\n"
-"POT-Creation-Date: 2016-12-04 19:12+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-04 20:59+0100\n"
 "PO-Revision-Date: 2016-12-04 19:13+0100\n"
 "Last-Translator: Zoltán Adamek <adamek.zoltan@gmail.com>\n"
 "Language-Team: Hungarian <adamek.zoltan@gmail.com>\n"
@@ -15,7 +15,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=n != 1;\n"
 
-#: votes/models.py:133
+#: calendstar/templates/calendstar/index.html:5
+#, fuzzy
+#| msgid "TeamStars overview"
+msgid "TeamStars calendar"
+msgstr "TeamStars áttekintés"
+
+#: calendstar/templates/calendstar/index.html:9
+msgid "Event title"
+msgstr "Esemény címe"
+
+#: calendstar/templates/calendstar/index.html:10
+#: calendstar/templates/calendstar/single.html:9
+msgid "Location"
+msgstr "Helyszín"
+
+#: calendstar/templates/calendstar/index.html:11
+#: calendstar/templates/calendstar/single.html:10
+msgid "Starts"
+msgstr "Kezdődik"
+
+#: calendstar/templates/calendstar/index.html:12
+#: calendstar/templates/calendstar/single.html:11
+msgid "Ends"
+msgstr "Befejeződik"
+
+#: calendstar/templates/calendstar/index.html:13
+#: calendstar/templates/calendstar/single.html:14
+msgid "Private"
+msgstr "Privát"
+
+#: calendstar/templates/calendstar/index.html:14
+msgid "Status"
+msgstr "Állapot"
+
+#: calendstar/templates/calendstar/single.html:12
+msgid "Description"
+msgstr "Leírás"
+
+#: calendstar/templates/calendstar/single.html:13
+msgid "Submitted by"
+msgstr "Beküldte"
+
+#: common/forms.py:10
+msgid ""
+"Enter a valid username. This value may contain only letters, numbers and @/./"
+"+/-/_ characters."
+msgstr ""
+"Adj meg egy érvényes felhasználónevet. Ez csak ékezet nélküli betűket, "
+"számokat és @ / . / + / - / _ karaktereket tartalmazhat."
+
+#: common/templates/common/settings.html:5
+#, fuzzy
+#| msgid "TeamStars overview"
+msgid "TeamStars user management"
+msgstr "TeamStars áttekintés"
+
+#: common/templates/common/settings.html:10 votes/templates/votes/index.html:10
+#, python-format
+msgid "Welcome %(username)s!"
+msgstr "Szia %(username)s!"
+
+#: votes/models.py:122
 msgid "A user should not send votes to himself."
 msgstr "Nem lehetséges szavazatot küldeni saját magunknak."
 
@@ -23,29 +84,39 @@ msgstr "Nem lehetséges szavazatot küldeni saját magunknak."
 msgid "TeamStars overview"
 msgstr "TeamStars áttekintés"
 
-#: votes/templates/votes/index.html:7
+#: votes/templates/votes/index.html:12
+#, python-format
+msgid "Birth date: %(birth_date)s"
+msgstr "Születésnap: %(birth_date)s"
+
+#: votes/templates/votes/index.html:13
+#, python-format
+msgid "Current location: %(location)s"
+msgstr "Jelenlegi tartózkodási hely: %(location)s"
+
+#: votes/templates/votes/index.html:23
 msgid "Leaderboard"
 msgstr "A jelenlegi állás"
 
-#: votes/templates/votes/index.html:15
+#: votes/templates/votes/index.html:32
 msgid "Vote statistics"
 msgstr "Szavazati statisztikák"
 
-#: votes/templates/votes/index.html:18
+#: votes/templates/votes/index.html:35
 #, python-format
 msgid "Votes sent with type \"%(typename)s\""
 msgstr "\"%(typename)s\" típusú szavazatok"
 
-#: votes/templates/votes/index.html:23
+#: votes/templates/votes/index.html:40
 #, python-format
 msgid "<strong>%(username)s</strong> sent %(count)s votes"
 msgstr "<strong>%(username)s</strong> %(count)s szavazatot küldött"
 
-#: votes/templates/votes/index.html:29
+#: votes/templates/votes/index.html:48
 msgid "How to use"
 msgstr "Útmutató"
 
-#: votes/templates/votes/index.html:31
+#: votes/templates/votes/index.html:50
 #, python-format
 msgid "Please find the API page <a href=\"%(api_url)s\">here</a>."
 msgstr "Az API oldalt <a href=\"%(api_url)s\">itt találod</a>."

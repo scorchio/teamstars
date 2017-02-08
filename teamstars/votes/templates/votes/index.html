@@ -1,5 +1,5 @@
 {% extends 'votes/base.html' %}
-{% load i18n %}
+{% load i18n static %}
 {% block content %}
 
 <h1>{% trans "TeamStars overview" %}</h1>
@@ -7,7 +7,11 @@
     <div class="row">
         <div class="column">
             {% if request.user.is_authenticated %}
-                <h2>Welcome {{ request.user.username }}!</h2>
+                <h2>{% blocktrans with username=request.user.username %}Welcome {{ username }}!{% endblocktrans %}</h2>
+                <img src="{% get_media_prefix %}{{ request.user.profile.photo }}" alt="" />
+                <p>{% blocktrans with birth_date=request.user.profile.birth_date %}Birth date: {{ birth_date }}{% endblocktrans %}</p>
+                <p>{% blocktrans with location=request.user.profile.location %}Current location: {{ location }}{% endblocktrans %}</p>
+                <a href="{% url 'logout_redirect' %}" class="button button-outline">Logout</a>
             {% else %}
                 <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button button-outline">Login with Facebook</a>
             {% endif %}
