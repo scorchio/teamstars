@@ -2,7 +2,7 @@
 {% load i18n static %}
 {% block content %}
 
-<h1>{% trans "TeamStars overview" %}</h1>
+    <h1>{% trans "TeamStars overview" %}</h1>
 
     <div class="row">
         <div class="column">
@@ -13,13 +13,13 @@
                 <p>{% blocktrans with location=request.user.profile.location %}Current location: {{ location }}{% endblocktrans %}</p>
                 <a href="{% url 'logout_redirect' %}" class="button button-outline">Logout</a>
             {% else %}
-                <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button button-outline">Login with Facebook</a>
+                <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button button-outline">{% trans "Login with Facebook" %}</a>
             {% endif %}
         </div>
     </div>
 
 <div class="row">
-    <div class="column">
+    <div class="column small-12 medium-6">
         <h2>{% trans "Leaderboard" %}</h2>
 
         <ol>
@@ -28,7 +28,7 @@
         {% endfor %}
         </ol>
     </div>
-    <div class="column">
+    <div class="column small-12 medium-6">
         <h2>{% trans "Vote statistics" %}</h2>
         {% for vote_type, vote_type_stat in vote_stats.sent.items %}
             <h3>
