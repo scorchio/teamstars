@@ -1,28 +1,28 @@
-{% extends 'calendstar/base.html' %}
+{% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
 
 <h1>{{ event.title }}</h1>
 
-    <table>
-        <thead>
-        <th>{% trans 'Location' %}</th>
-        <th>{% trans 'Starts' %}</th>
-        <th>{% trans 'Ends' %}</th>
-        <th>{% trans 'Description' %}</th>
-        <th>{% trans 'Submitted by' %}</th>
-        <th>{% trans 'Private' %}</th>
-        </thead>
+<table>
+    <thead>
+    <th>{% trans 'Location' %}</th>
+    <th>{% trans 'Starts' %}</th>
+    <th>{% trans 'Ends' %}</th>
+    <th>{% trans 'Description' %}</th>
+    <th>{% trans 'Submitted by' %}</th>
+    <th>{% trans 'Private' %}</th>
+    </thead>
 
-        <tr>
-            <td>{{ event.location }}</td>
-            <td>{{ event.starts }}</td>
-            <td>{{ event.ends }}</td>
-            <td>{{ event.description }}</td>
-            <td>{{ event.submitted_by }}</td>
-            <td>{{ event.is_private }}</td>
-        </tr>
+    <tr>
+        <td>{{ event.location }}</td>
+        <td>{{ event.starts }}</td>
+        <td>{{ event.ends }}</td>
+        <td>{{ event.description }}</td>
+        <td>{{ event.submitted_by }}</td>
+        <td>{{ event.is_private }}</td>
+    </tr>
 
-    </table>
+</table>
 
 {% endblock %}

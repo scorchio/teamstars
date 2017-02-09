@@ -22,7 +22,27 @@ SECRET_KEY = '%#j#2$4u42ityk=7xtd(moy*a3v0f+4=7^ba_%&@e@84^a)_09'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
+                'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.request',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 ALLOWED_HOSTS = [
     'teamstars-project-dev.eu-central-1.elasticbeanstalk.com',
@@ -57,13 +77,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'social_django.context_processors.backends',
-    'social_django.context_processors.login_redirect',
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.request',
 )
 
 ROOT_URLCONF = 'teamstars.urls'

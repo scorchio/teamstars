@@ -1,28 +1,28 @@
-{% extends 'calendstar/base.html' %}
+{% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
 
 <h1>{% trans "TeamStars calendar" %}</h1>
 
-    <table>
-        <thead>
-        <th>{% trans 'Event title' %}</th>
-        <th>{% trans 'Location' %}</th>
-        <th>{% trans 'Starts' %}</th>
-        <th>{% trans 'Ends' %}</th>
-        <th>{% trans 'Private' %}</th>
-        <th>{% trans 'Status' %}</th>
-        </thead>
-        {% for event in events %}
-        <tr>
-            <td><a href="event/{{ event.id }}">{{ event.title }}</a></td>
-            <td>{{ event.location }}</td>
-            <td>{{ event.starts }}</td>
-            <td>{{ event.ends }}</td>
-            <td>{{ event.is_private }}</td>
-            <td>Yes | No | Maybe | Did not respond</td>
-        </tr>
-        {% endfor %}
-    </table>
+<table>
+    <thead>
+    <th>{% trans 'Event title' %}</th>
+    <th>{% trans 'Location' %}</th>
+    <th>{% trans 'Starts' %}</th>
+    <th>{% trans 'Ends' %}</th>
+    <th>{% trans 'Private' %}</th>
+    <th>{% trans 'Status' %}</th>
+    </thead>
+    {% for event in events %}
+    <tr>
+        <td><a href="event/{{ event.id }}">{{ event.title }}</a></td>
+        <td>{{ event.location }}</td>
+        <td>{{ event.starts }}</td>
+        <td>{{ event.ends }}</td>
+        <td>{{ event.is_private }}</td>
+        <td>Yes | No | Maybe | Did not respond</td>
+    </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}
