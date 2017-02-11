@@ -21,8 +21,8 @@ gulp.task('sass', function() {
 });
 
 gulp.task('js', function() {
-  return gulp.src(['node_modules/foundation-sites/node_modules/jquery/dist/jquery.js',
-                    'node_modules/foundation-sites/node_modules/what-input/what-input.js',
+  return gulp.src(['node_modules/jquery/dist/jquery.js',
+                    'node_modules/what-input/what-input.js',
                     'node_modules/foundation-sites/dist/foundation.js',
                     'js/app.js'])
             .pipe($.concat('app.js'))
