@@ -8,6 +8,7 @@ def index(request):
     context = {
         'leaderboard': Vote.objects.leaderboard(),
         'vote_stats': Vote.objects.vote_statistics(),
+        'stars': 42,
     }
     return render(request, 'votes/index.html', context)
 
