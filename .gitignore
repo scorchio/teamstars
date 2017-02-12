@@ -105,3 +105,4 @@ virtualenv/
 # Node modules
 
 teamstars/static/node_modules
+teamstars/media
