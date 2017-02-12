@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import admin
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -26,3 +27,6 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     logger.debug('saving user profile')
     instance.profile.save()
+
+
+admin.site.register(Profile)
