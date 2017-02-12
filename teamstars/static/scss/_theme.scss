@@ -1,3 +1,25 @@
 h1 {
 	color: #635BC0;
 }
+
+$menu-margin: rem-calc(8);
+$menu-image-size: rem-calc(36);
+
+.menu--profile-image {
+	height: $menu-image-size;
+	width: $menu-image-size;
+	object-fit: cover;
+	border-radius: $global-radius;
+	margin-left: $menu-margin;
+	margin-right: $menu-margin;
+}
+
+.menu--welcome {
+	margin-left: $menu-margin;
+	margin-right: $menu-margin;
+}
+
+.menu--login, .menu--logout {
+	margin-left: $menu-margin;
+	margin-right: $menu-margin;
+}
