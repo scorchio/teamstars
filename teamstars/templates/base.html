@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -9,6 +10,28 @@
 </head>
 
 <body>
+<div class="top-bar">
+	<div class="top-bar-left">
+	    <ul class="dropdown menu" data-dropdown-menu>
+    	  	<li class="menu-text">{% trans 'TeamStars' %}</li>
+    	  	<li><a href="../votes/">{% trans 'Votes' %}</a></li>
+      		<li><a href="../calendar/">{% trans 'Calendar' %}</a></li>
+	  	</ul>
+	</div>
+	<div class="top-bar-right">
+		<ul class="menu">
+      		<li>{% if request.user.is_authenticated %}
+                <h2>{% blocktrans with username=request.user.username %}Welcome {{ username }}!{% endblocktrans %}</h2>
+                <img src="{% get_media_prefix %}{{ request.user.profile.photo }}" alt="" />
+                <p>{% blocktrans with birth_date=request.user.profile.birth_date %}Birth date: {{ birth_date }}{% endblocktrans %}</p>
+                <p>{% blocktrans with location=request.user.profile.location %}Current location: {{ location }}{% endblocktrans %}</p>
+                <a href="{% url 'logout_redirect' %}" class="button button-outline">Logout</a>
+            {% else %}
+                <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button button-outline">{% trans "Login with Facebook" %}</a>
+            {% endif %}</li>
+    	</ul>
+	</div>
+</div>
 <div class="container row column">
 {% block content %}{% endblock content %}
 </div>

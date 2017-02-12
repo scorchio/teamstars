@@ -4,20 +4,6 @@
 
     <h1>{% trans "TeamStars overview" %}</h1>
 
-    <div class="row">
-        <div class="column">
-            {% if request.user.is_authenticated %}
-                <h2>{% blocktrans with username=request.user.username %}Welcome {{ username }}!{% endblocktrans %}</h2>
-                <img src="{% get_media_prefix %}{{ request.user.profile.photo }}" alt="" />
-                <p>{% blocktrans with birth_date=request.user.profile.birth_date %}Birth date: {{ birth_date }}{% endblocktrans %}</p>
-                <p>{% blocktrans with location=request.user.profile.location %}Current location: {{ location }}{% endblocktrans %}</p>
-                <a href="{% url 'logout_redirect' %}" class="button button-outline">Logout</a>
-            {% else %}
-                <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button button-outline">{% trans "Login with Facebook" %}</a>
-            {% endif %}
-        </div>
-    </div>
-
 <div class="row">
     <div class="column small-12 medium-6">
         <h2>{% trans "Leaderboard" %}</h2>
