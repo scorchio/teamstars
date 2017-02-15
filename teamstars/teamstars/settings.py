@@ -64,7 +64,7 @@ INSTALLED_APPS = (
     'votes',
     'calendstar',
     'rest_framework',
-    #'debug_toolbar',
+    'debug_toolbar',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -76,7 +76,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'teamstars.urls'
@@ -146,8 +146,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 # TODO Scor: fix static file handling for debug toolbar on windows
-
-print "Static path is ", STATICFILES_DIRS
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
