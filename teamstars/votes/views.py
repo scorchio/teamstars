@@ -13,6 +13,11 @@ def index(request):
     return render(request, 'votes/index.html', context)
 
 
+def add(request):
+    context = {}
+    return render(request, 'votes/add.html', context)
+
+
 def logout_view(request):
     logout(request)
     return redirect('vote_index')

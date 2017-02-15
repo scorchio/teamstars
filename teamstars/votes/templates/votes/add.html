@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+
+<h1>Szavazat küldése</h1>
+
+<form>
+    <div class="row">
+        <div class="small-12 columns">
+            <input type="text" placeholder="Miért szeretnél szavazatot küldeni?">
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-12 columns">
+            <textarea placeholder="Bővebben fejtsd ki, miért is szeretnél szavazatot küldeni."></textarea>
+        </div>
+    </div>
+    <fieldset class="small-12 columns faces">
+        <div class="row small-up-2 medium-up-3 large-up-4">
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox1">
+                    <span class="persons--avatar-wrapper"><img src="img/yasa.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Yasa</span>
+                    <input id="checkbox1" type="checkbox" class="hide">
+                </label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox2">
+                    <span class="persons--avatar-wrapper"><img src="img/scorchio.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Scor</span>
+                    <input id="checkbox2" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox3">
+                    <span class="persons--avatar-wrapper"><img src="img/Zaku.png" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Zaku</span>
+                    <input id="checkbox3" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox4">
+                    <span class="persons--avatar-wrapper"><img src="img/Rizi.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Rizi</span>
+                    <input id="checkbox4" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox5">
+                    <span class="persons--avatar-wrapper"><img src="img/Dave.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Dávid</span>
+                    <input id="checkbox5" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox6">
+                    <span class="persons--avatar-wrapper"><img src="img/Kardfogu.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Peti</span>
+                    <input id="checkbox6" type="checkbox"  class="hide"></label>
+            </div>
+
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox7">
+                    <span class="persons--avatar-wrapper"><img src="img/Eszeveszett%20Wood.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Ottó</span>
+                    <input id="checkbox7" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox8">
+                    <span class="persons--avatar-wrapper"><img src="img/Félix.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Félix</span>
+                    <input id="checkbox8" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox9">
+                    <span class="persons--avatar-wrapper"><img src="img/Hane.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Hajni</span>
+                    <input id="checkbox9" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox10">
+                    <span class="persons--avatar-wrapper"><img src="img/Idontruin.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Renátó</span>
+                    <input id="checkbox10" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox11">
+                    <span class="persons--avatar-wrapper"><img src="img/Kenny.png" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Imre</span>
+                    <input id="checkbox11" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox12">
+                    <span class="persons--avatar-wrapper"><img src="img/Rin.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Rin</span>
+                    <input id="checkbox12" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox13">
+                    <span class="persons--avatar-wrapper"><img src="img/Taka.gif" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Taka</span>
+                    <input id="checkbox13" type="checkbox"  class="hide"></label>
+            </div>
+            <div class="column">
+                <label class="persons--container button hollow expanded" for="checkbox14">
+                    <span class="persons--avatar-wrapper"><img src="img/Winter.jpg" class="persons--avatar" /></span>
+                    <span class="persons--avatar-nick">Winter</span>
+                    <input id="checkbox14" type="checkbox"  class="hide"></label>
+            </div>
+        </div>
+    </fieldset>
+    <div class="row">
+        <div class="columns"><input type="submit" class="button expanded large" value="Szavazok rájuk a jól!"></div>
+    </div>
+</form>
+
+{% endblock %}
