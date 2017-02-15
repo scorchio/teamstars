@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 
@@ -14,7 +15,9 @@ def index(request):
 
 
 def add(request):
-    context = {}
+    context = {
+        'users': User.objects.all(),
+    }
     return render(request, 'votes/add.html', context)
 
 
