@@ -25,8 +25,12 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    logger.debug('saving user profile')
-    instance.profile.save()
+    try:
+        instance.profile.save()
+        logger.debug('Saved user profile')
+    except Profile.DoesNotExist:
+        logger.debug("No user profile yet, creating a new one")
+        Profile.objects.create(user=instance)
 
 
 admin.site.register(Profile)
