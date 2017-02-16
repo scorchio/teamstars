@@ -116,6 +116,14 @@ else:
             'PASSWORD': 'teamstars',
             'HOST': 'localhost',
             'PORT': '5432',
+        },
+        'legacy': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['LEGACY_DB_NAME'],
+            'USER': os.environ['LEGACY_DB_USER'],
+            'PASSWORD': os.environ['LEGACY_DB_PASSWORD'],
+            'HOST': 'localhost',
+            'PORT': '3306',
         }
     }
 
