@@ -10,17 +10,20 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         with connections['legacy'].cursor() as cursor:
             cursor.execute("select u.name, u.mail, u.created, "
+                           "r.name as role, "
                            "fn.field_user_full_name_value as fullname "
-                           "from users u left join field_data_field_user_full_name fn "
-                           "on u.uid = fn.entity_id")
+                           "from users u left join field_data_field_user_full_name fn on u.uid = fn.entity_id "
+                           "left join (users_roles ur left join role r on ur.rid=r.rid) on u.uid=ur.uid"
+                           )
             columns = [col[0] for col in cursor.description]
             result = [dict(zip(columns, row)) for row in cursor.fetchall()]
             for user in result:
-                self.stdout.write(u'User: {name} ({fullname}) <{mail}> - {created}'.format(
+                self.stdout.write(u'User: {name} ({fullname}) <{mail}> - {created} - {role}'.format(
                     mail=user['mail'],
                     created=datetime.utcfromtimestamp(user['created']),
                     name=user['name'],
-                    fullname=user['fullname']
+                    fullname=user['fullname'],
+                    role=user['role']
                 ))
 
         # TODO: upgrade to Django 1.9+ to support styling in management commands
