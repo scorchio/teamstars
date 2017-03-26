@@ -173,6 +173,9 @@ LOGGING = {
     }
 }
 
+LOGIN_URL = '/user/login/'
+LOGIN_REDIRECT_URL = '/user/login/'
+
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend'

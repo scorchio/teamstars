@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% block content %}
+
+    <h1>{% trans "TeamStars login" %}</h1>
+
+    <div class="row">
+        <div class="medium-6 columns">
+            <div class="card">
+                <div class="card-divider">
+                    <h4>Log in with your username and password...</h4>
+                </div>
+                <div class="card-section">
+                    <form id="login-form" method="post"
+                          action="{% url 'django.contrib.auth.views.login' %}">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="columns"><input id="id_username" name="username"
+                                                                 type="text" placeholder="{% trans "Username" %}" class="form-control" /></div>
+                        </div>
+                        <div class="row">
+                            <div class="columns"><input id="id_password" name="password"
+                                                                 type="password" placeholder="{% trans "Password" %}"  class="form-control"/></div>
+                        </div>
+                        {% if form.errors %}
+                            <p class="callout alert">
+                                {% trans "Your username and password didn't match. Please try again." %}
+                            </p>
+                        {% endif %}
+                        <input type="submit" value="{% trans "Login" %}" class="button expanded" />
+                        <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="medium-6 columns">
+            <div class="card">
+                <div class="card-divider">
+                    <h4>...or with Facebook</h4>
+                </div>
+                <div class="card-section">
+                    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button expanded">Login with Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
