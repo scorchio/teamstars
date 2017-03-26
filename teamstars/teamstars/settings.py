@@ -13,14 +13,9 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+SECRET_KEY = os.environ['DJANGO_SECRET']
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%#j#2$4u42ityk=7xtd(moy*a3v0f+4=7^ba_%&@e@84^a)_09'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', False)
 
 TEMPLATES = [
     {
@@ -44,11 +39,7 @@ TEMPLATES = [
     },
 ]
 
-ALLOWED_HOSTS = [
-    'teamstars-project-dev.eu-central-1.elasticbeanstalk.com',
-    'teamstars.local',
-    '127.0.0.1']
-
+ALLOWED_HOSTS = os.environ.get('HOSTS', '127.0.0.1').split('|')
 
 # Application definition
 
@@ -177,7 +168,7 @@ LOGGING = {
     'loggers': {
         'votes': {
             'handlers': ['console'],
-            'level': DEBUG,
+            'level': 'DEBUG',
         }
     }
 }
