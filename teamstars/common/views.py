@@ -1,11 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-from django.contrib.auth.models import User
 
 from common.forms import UserSettingsForm
 
-
+@login_required
 def settings(request):
     if request.method == 'POST':
         form = UserSettingsForm(request.POST)
