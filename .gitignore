@@ -102,7 +102,7 @@ virtualenv/
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 
-# Node modules
-
+# Teamstars stuff
 teamstars/static/node_modules
+!teamstars/static/dist
 teamstars/media
