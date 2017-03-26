@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TeamStars 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-04 20:59+0100\n"
+"POT-Creation-Date: 2017-03-26 18:34+0200\n"
 "PO-Revision-Date: 2016-12-04 19:13+0100\n"
 "Last-Translator: Zoltán Adamek <adamek.zoltan@gmail.com>\n"
 "Language-Team: Hungarian <adamek.zoltan@gmail.com>\n"
@@ -71,10 +71,33 @@ msgstr ""
 msgid "TeamStars user management"
 msgstr "TeamStars áttekintés"
 
-#: common/templates/common/settings.html:10 votes/templates/votes/index.html:10
+#: common/templates/common/settings.html:10 templates/base.html:28
 #, python-format
 msgid "Welcome %(username)s!"
 msgstr "Szia %(username)s!"
+
+#: templates/base.html:16
+#, fuzzy
+#| msgid "TeamStars overview"
+msgid "TeamStars"
+msgstr "TeamStars áttekintés"
+
+#: templates/base.html:17
+msgid "Votes"
+msgstr "Szavazatok"
+
+#: templates/base.html:18
+msgid "Calendar"
+msgstr "Naptár"
+
+#: templates/base.html:32
+#, python-format
+msgid "You have %(stars)s stars."
+msgstr "%(stars)s csillagod van."
+
+#: templates/base.html:37
+msgid "Login with Facebook"
+msgstr "Bejelentkezés Facebook-kal"
 
 #: votes/models.py:122
 msgid "A user should not send votes to himself."
@@ -84,39 +107,35 @@ msgstr "Nem lehetséges szavazatot küldeni saját magunknak."
 msgid "TeamStars overview"
 msgstr "TeamStars áttekintés"
 
-#: votes/templates/votes/index.html:12
-#, python-format
-msgid "Birth date: %(birth_date)s"
-msgstr "Születésnap: %(birth_date)s"
-
-#: votes/templates/votes/index.html:13
-#, python-format
-msgid "Current location: %(location)s"
-msgstr "Jelenlegi tartózkodási hely: %(location)s"
-
-#: votes/templates/votes/index.html:23
+#: votes/templates/votes/index.html:9
 msgid "Leaderboard"
 msgstr "A jelenlegi állás"
 
-#: votes/templates/votes/index.html:32
+#: votes/templates/votes/index.html:18
 msgid "Vote statistics"
 msgstr "Szavazati statisztikák"
 
-#: votes/templates/votes/index.html:35
+#: votes/templates/votes/index.html:21
 #, python-format
 msgid "Votes sent with type \"%(typename)s\""
 msgstr "\"%(typename)s\" típusú szavazatok"
 
-#: votes/templates/votes/index.html:40
+#: votes/templates/votes/index.html:26
 #, python-format
 msgid "<strong>%(username)s</strong> sent %(count)s votes"
 msgstr "<strong>%(username)s</strong> %(count)s szavazatot küldött"
 
-#: votes/templates/votes/index.html:48
+#: votes/templates/votes/index.html:34
 msgid "How to use"
 msgstr "Útmutató"
 
-#: votes/templates/votes/index.html:50
+#: votes/templates/votes/index.html:36
 #, python-format
 msgid "Please find the API page <a href=\"%(api_url)s\">here</a>."
 msgstr "Az API oldalt <a href=\"%(api_url)s\">itt találod</a>."
+
+#~ msgid "Birth date: %(birth_date)s"
+#~ msgstr "Születésnap: %(birth_date)s"
+
+#~ msgid "Current location: %(location)s"
+#~ msgstr "Jelenlegi tartózkodási hely: %(location)s"
