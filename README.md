@@ -1,3 +1,6 @@
+![alt tag](https://raw.githubusercontent.com/scorchio/teamstars/feature-drupal-import/teamstars/static/img/teamstars_logo.png)
+
+
 # TeamStars: a Django pet project
 
 In small, non-formal communities there's often a need for sending positive 
