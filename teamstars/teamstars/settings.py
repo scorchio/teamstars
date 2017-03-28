@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social_django',
     'common',
-    #'votes',
+    'votes',
     'calendstar',
     'rest_framework',
     'debug_toolbar',
@@ -61,11 +61,11 @@ INSTALLED_APPS = (
 
 
 def votes_enabled():
-    return 'votes' in INSTALLED_APPS
+    return False
 
 
 def calendar_enabled():
-    return 'calendstar' in INSTALLED_APPS
+    return True
 
 
 MIDDLEWARE_CLASSES = (
