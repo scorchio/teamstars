@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load i18n static %}
+{% block content %}
+
+    <div class="row">
+        <div class="column">
+            <img src="{% static "img/teamstars_logo.png" %}" alt="TeamStars logo" />
+            <h1>{% trans "Welcome to TeamStars!" %}</h1>
+        </div>
+    </div>
+
+{% endblock %}

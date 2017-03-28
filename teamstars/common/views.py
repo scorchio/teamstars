@@ -24,3 +24,7 @@ def settings(request):
 def logout_view(request):
     logout(request)
     return redirect('vote_index')
+
+
+def index(request):
+    return render(request, 'common/start.html')
