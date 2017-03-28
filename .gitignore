@@ -106,3 +106,4 @@ virtualenv/
 teamstars/static/node_modules
 !teamstars/static/dist
 teamstars/media
+fixtures/drupal_initial.json

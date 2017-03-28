@@ -1,6 +1,8 @@
 from datetime import datetime
+import pytz
 
 from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
 from django.db import connections
 
 
@@ -24,13 +26,21 @@ class Command(BaseCommand):
                 if user['uid'] != 0:
                     self.stdout.write(u'User: {name} ({fullname}) <{mail}> - {created} - {role} - {picture} - {status}'.format(
                         mail=user['mail'],
-                        created=datetime.utcfromtimestamp(user['created']),
+                        created=pytz.utc.localize(datetime.utcfromtimestamp(user['created'])),
                         name=user['name'],
                         fullname=user['fullname'],
                         role=user['role'],
                         picture=user['picture'],
                         status=user['status']
                     ))
+                    User.objects.create(
+                        username=user['name'],
+                        is_staff=False,
+                        is_active=user['status'],
+                        is_superuser=False,
+                        email=user['mail'],
+                        date_joined=pytz.utc.localize(datetime.utcfromtimestamp(user['created'])),
+                    )
 
         # TODO: upgrade to Django 1.9+ to support styling in management commands
         self.stdout.write('Successfully run command')
