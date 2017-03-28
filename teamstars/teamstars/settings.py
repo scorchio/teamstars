@@ -34,6 +34,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'common.template_context_processor.feature_settings',
             ],
         },
     },
@@ -52,11 +53,20 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social_django',
     'common',
-    'votes',
+    #'votes',
     'calendstar',
     'rest_framework',
     'debug_toolbar',
 )
+
+
+def votes_enabled():
+    return 'votes' in INSTALLED_APPS
+
+
+def calendar_enabled():
+    return 'calendstar' in INSTALLED_APPS
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',

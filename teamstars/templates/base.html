@@ -14,9 +14,13 @@
 	<div class="top-bar-left">
 	    <ul class="dropdown menu" data-dropdown-menu>
     	  	<li class="menu-text">{% trans 'TeamStars' %}</li>
-    	  	<li><a href="../votes/">{% trans 'Votes' %}</a></li>
-      		<li><a href="../calendar/">{% trans 'Calendar' %}</a></li>
-	  	</ul>
+            {% if VOTES_ENABLED %}
+                <li><a href="../votes/">{% trans 'Votes' %}</a></li>
+            {% endif %}
+    	  	{% if CALENDAR_ENABLED %}
+      		    <li><a href="../calendar/">{% trans 'Calendar' %}</a></li>
+            {% endif %}
+        </ul>
 	</div>
 	<div class="top-bar-right">
 		<ul class="menu">
@@ -24,7 +28,7 @@
                 <li>
                 	<img src="{% get_media_prefix %}{{ request.user.profile.photo }}" alt="" class="menu--profile-image"/>
                 </li>
-                <li>	
+                <li>
                 	<span class="menu--welcome">{% blocktrans with username=request.user.username %}Welcome {{ username }}!{% endblocktrans %}</span>
                 </li>
                 {% if stars %}
