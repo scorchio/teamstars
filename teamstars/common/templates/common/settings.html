@@ -9,9 +9,9 @@
             {% if request.user.is_authenticated %}
                 <h2>{% blocktrans with username=request.user.username %}Welcome {{ username }}!{% endblocktrans %}</h2>
                 <img src="{% get_media_prefix %}{{ request.user.profile.photo }}" alt="" />
-                <a href="{% url 'logout_redirect' %}" class="button button-outline">Logout</a>
+                <a href="{% url 'logout_redirect' %}" class="button button-outline">{% trans "Logout" %}</a>
             {% else %}
-                <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button button-outline">Login with Facebook</a>
+                <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button button-outline">{% trans "Login with Facebook" %}</a>
             {% endif %}
         </div>
     </div>
@@ -20,7 +20,7 @@
             <form action="/user/" method="post">
                 {% csrf_token %}
                 {{ form }}
-                <input type="submit" value="Submit" />
+                <input type="submit" value="{% trans "Submit" %}" />
             </form>
         </div>
     </div>

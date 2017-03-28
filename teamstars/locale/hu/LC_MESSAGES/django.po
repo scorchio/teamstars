@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TeamStars 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-26 18:34+0200\n"
+"POT-Creation-Date: 2017-03-28 22:28+0200\n"
 "PO-Revision-Date: 2016-12-04 19:13+0100\n"
 "Last-Translator: Zoltán Adamek <adamek.zoltan@gmail.com>\n"
 "Language-Team: Hungarian <adamek.zoltan@gmail.com>\n"
@@ -16,10 +16,8 @@ msgstr ""
 "Plural-Forms:  nplurals=2; plural=n != 1;\n"
 
 #: calendstar/templates/calendstar/index.html:5
-#, fuzzy
-#| msgid "TeamStars overview"
 msgid "TeamStars calendar"
-msgstr "TeamStars áttekintés"
+msgstr "TeamStars naptár"
 
 #: calendstar/templates/calendstar/index.html:9
 msgid "Event title"
@@ -65,22 +63,54 @@ msgstr ""
 "Adj meg egy érvényes felhasználónevet. Ez csak ékezet nélküli betűket, "
 "számokat és @ / . / + / - / _ karaktereket tartalmazhat."
 
-#: common/templates/common/settings.html:5
-#, fuzzy
-#| msgid "TeamStars overview"
-msgid "TeamStars user management"
+#: common/templates/common/login.html:5
+msgid "TeamStars login"
 msgstr "TeamStars áttekintés"
+
+#: common/templates/common/login.html:19
+msgid "Username"
+msgstr "Felhasználónév"
+
+#: common/templates/common/login.html:23
+msgid "Password"
+msgstr "Jelszó"
+
+#: common/templates/common/login.html:27
+msgid "Your username and password didn't match. Please try again."
+msgstr "A felhasználónév / jelszó páros nem stimmel - próbáld újra!"
+
+#: common/templates/common/login.html:30
+msgid "Login"
+msgstr "Bejelentkezés"
+
+#: common/templates/common/settings.html:5
+msgid "TeamStars user management"
+msgstr "TeamStars felhasználó kezelés"
 
 #: common/templates/common/settings.html:10 templates/base.html:28
 #, python-format
 msgid "Welcome %(username)s!"
 msgstr "Szia %(username)s!"
 
+#: common/templates/common/settings.html:12
+msgid "Logout"
+msgstr "Kijelentkezés"
+
+#: common/templates/common/settings.html:14 templates/base.html:37
+msgid "Login with Facebook"
+msgstr "Bejelentkezés Facebook-kal"
+
+#: common/templates/common/settings.html:23
+msgid "Submit"
+msgstr "Beküldés"
+
+#: common/templates/common/start.html:8
+msgid "Welcome to TeamStars!"
+msgstr "Üdv a TeamStars-ban!"
+
 #: templates/base.html:16
-#, fuzzy
-#| msgid "TeamStars overview"
 msgid "TeamStars"
-msgstr "TeamStars áttekintés"
+msgstr "TeamStars"
 
 #: templates/base.html:17
 msgid "Votes"
@@ -94,10 +124,6 @@ msgstr "Naptár"
 #, python-format
 msgid "You have %(stars)s stars."
 msgstr "%(stars)s csillagod van."
-
-#: templates/base.html:37
-msgid "Login with Facebook"
-msgstr "Bejelentkezés Facebook-kal"
 
 #: votes/models.py:122
 msgid "A user should not send votes to himself."
