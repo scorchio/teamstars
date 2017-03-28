@@ -4,25 +4,23 @@
 
 <h1>{% trans "TeamStars calendar" %}</h1>
 
-<table>
-    <thead>
-    <th>{% trans 'Event title' %}</th>
-    <th>{% trans 'Location' %}</th>
-    <th>{% trans 'Starts' %}</th>
-    <th>{% trans 'Ends' %}</th>
-    <th>{% trans 'Private' %}</th>
-    <th>{% trans 'Status' %}</th>
-    </thead>
+<div class="columns">
     {% for event in events %}
-    <tr>
-        <td><a href="event/{{ event.id }}">{{ event.title }}</a></td>
-        <td>{{ event.location }}</td>
-        <td>{{ event.starts }}</td>
-        <td>{{ event.ends }}</td>
-        <td>{{ event.is_private }}</td>
-        <td>Yes | No | Maybe | Did not respond</td>
-    </tr>
+        <div class="card">
+            <div class="card-divider">
+                <h3><a href="event/{{ event.id }}">{{ event.title }}</a></h3>
+            </div>
+            <div class="card-section">
+                <p>{{ event.location }}</p>
+            </div>
+            <div class="card-section">
+                <p>{{ event.starts }} - {{ event.ends }}</p>
+            </div>
+            <div class="card-section">
+                <p>{{ event.is_private }}</p>
+            </div>
+        </div>
     {% endfor %}
-</table>
+</div>
 
 {% endblock %}
