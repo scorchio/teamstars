@@ -1,4 +1,4 @@
-![alt tag](https://raw.githubusercontent.com/scorchio/teamstars/feature-drupal-import/teamstars/static/img/teamstars_logo.png)
+![alt tag](https://raw.githubusercontent.com/scorchio/teamstars/master/teamstars/static/img/teamstars_logo.png)
 
 
 # TeamStars: a Django pet project
