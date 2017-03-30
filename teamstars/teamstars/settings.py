@@ -226,7 +226,7 @@ SOCIAL_AUTH_PIPELINE = (
 
     # Make up a username for this person, appends a random string at the end if
     # there's any collision.
-    'social_core.pipeline.user.get_username',
+    # 'social_core.pipeline.user.get_username',
 
     # Send a validation email to the user to verify its email address.
     # Disabled by default.
@@ -237,7 +237,8 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_by_email',
 
     # Create a user account if we haven't found one yet.
-    'social_core.pipeline.user.create_user',
+    # Turned off - we are not creating new user accounts at the moment, just associating the existing ones
+    # 'social_core.pipeline.user.create_user',
 
     # Create the record that associates the social account with the user.
     'social_core.pipeline.social_auth.associate_user',
