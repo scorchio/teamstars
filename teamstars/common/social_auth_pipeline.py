@@ -1,8 +1,9 @@
 from datetime import datetime
+from requests import request, HTTPError
 
 from django.contrib import messages
 from django.shortcuts import render_to_response
-from requests import request, HTTPError
+from django.utils.translation import ugettext as _
 
 from django.core.files.base import ContentFile
 from social_core.pipeline.partial import partial
@@ -51,14 +52,12 @@ def save_profile_picture(backend, user, response, details,
 def handle_errors(strategy, details, user=None, *args, **kwargs):
     if not user:
         messages.info(strategy.request,
-                      """
-                      We couldn't find your user. There might be two reasons: either you're not registered yet, or
-                      the email address that we know about doesn't match your email address in Facebook. Please contact
-                      the site administrator to fix this.
-                      """)
+                      _("We couldn't find your user. There might be two reasons: either you're not registered yet, or "
+                      "the email address that we know about doesn't match your email address in Facebook. Please contact "
+                      "the site administrator to fix this."))
 
 
-@partial
-def pick_username(backend, details, response, is_new=False, *args, **kwargs):
-    if backend.name == 'facebook': # and is_new:
-        return render_to_response('pick_username.html')
+# @partial
+#def pick_username(backend, details, response, is_new=False, *args, **kwargs):
+#     if backend.name == 'facebook': # and is_new:
+#        return render_to_response('pick_username.html')

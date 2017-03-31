@@ -15,10 +15,10 @@
 	    <ul class="dropdown menu" data-dropdown-menu>
     	  	<li class="menu-text">{% trans 'TeamStars' %}</li>
             {% if VOTES_ENABLED %}
-                <li><a href="../votes/">{% trans 'Votes' %}</a></li>
+                <li><a href="/votes/">{% trans 'Votes' %}</a></li>
             {% endif %}
     	  	{% if CALENDAR_ENABLED %}
-      		    <li><a href="../calendar/">{% trans 'Calendar' %}</a></li>
+      		    <li><a href="/calendar/">{% trans 'Calendar' %}</a></li>
             {% endif %}
         </ul>
 	</div>
@@ -38,7 +38,7 @@
                 {% endif %}
                 <li><a href="{% url 'logout_redirect' %}" class="menu--logout button button-outline">Logout</a></li>
             {% else %}
-                <li><a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="menu--login button button-outline">{% trans "Login with Facebook" %}</a></li>
+                <li><a href="{% url 'social:begin' 'facebook' %}?next=/" class="menu--login button button-outline">{% trans "Login with Facebook" %}</a></li>
             {% endif %}
     	</ul>
 	</div>

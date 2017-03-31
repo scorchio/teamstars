@@ -18,7 +18,7 @@
         <div class="medium-6 columns">
             <div class="card">
                 <div class="card-divider">
-                    <h4>Log in with your username and password...</h4>
+                    <h4>{% trans "Log in with your username and password..." %}</h4>
                 </div>
                 <div class="card-section">
                     <form id="login-form" method="post"
@@ -46,10 +46,10 @@
         <div class="medium-6 columns">
             <div class="card">
                 <div class="card-divider">
-                    <h4>...or with Facebook</h4>
+                    <h4>{% trans "...or with Facebook" %}</h4>
                 </div>
                 <div class="card-section">
-                    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button expanded">Login with Facebook</a>
+                    <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class="button expanded">{% trans "Login with Facebook" %}</a>
                 </div>
             </div>
         </div>

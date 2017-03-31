@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TeamStars 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-28 22:28+0200\n"
+"POT-Creation-Date: 2017-03-31 09:26+0200\n"
 "PO-Revision-Date: 2016-12-04 19:13+0100\n"
 "Last-Translator: Zoltán Adamek <adamek.zoltan@gmail.com>\n"
 "Language-Team: Hungarian <adamek.zoltan@gmail.com>\n"
@@ -15,37 +15,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms:  nplurals=2; plural=n != 1;\n"
 
+#: calendstar/models.py:28
+msgid "Yes"
+msgstr "Igen"
+
+#: calendstar/models.py:29
+msgid "Likely yes"
+msgstr "Valószínűleg igen"
+
+#: calendstar/models.py:30
+msgid "Likely no"
+msgstr "Valószínűleg nem"
+
+#: calendstar/models.py:31
+msgid "No"
+msgstr "Nem"
+
 #: calendstar/templates/calendstar/index.html:5
 msgid "TeamStars calendar"
 msgstr "TeamStars naptár"
 
-#: calendstar/templates/calendstar/index.html:9
-msgid "Event title"
-msgstr "Esemény címe"
-
-#: calendstar/templates/calendstar/index.html:10
 #: calendstar/templates/calendstar/single.html:9
 msgid "Location"
 msgstr "Helyszín"
 
-#: calendstar/templates/calendstar/index.html:11
 #: calendstar/templates/calendstar/single.html:10
 msgid "Starts"
 msgstr "Kezdődik"
 
-#: calendstar/templates/calendstar/index.html:12
 #: calendstar/templates/calendstar/single.html:11
 msgid "Ends"
 msgstr "Befejeződik"
-
-#: calendstar/templates/calendstar/index.html:13
-#: calendstar/templates/calendstar/single.html:14
-msgid "Private"
-msgstr "Privát"
-
-#: calendstar/templates/calendstar/index.html:14
-msgid "Status"
-msgstr "Állapot"
 
 #: calendstar/templates/calendstar/single.html:12
 msgid "Description"
@@ -55,6 +55,10 @@ msgstr "Leírás"
 msgid "Submitted by"
 msgstr "Beküldte"
 
+#: calendstar/templates/calendstar/single.html:14
+msgid "Private"
+msgstr "Privát"
+
 #: common/forms.py:10
 msgid ""
 "Enter a valid username. This value may contain only letters, numbers and @/./"
@@ -63,31 +67,58 @@ msgstr ""
 "Adj meg egy érvényes felhasználónevet. Ez csak ékezet nélküli betűket, "
 "számokat és @ / . / + / - / _ karaktereket tartalmazhat."
 
+#: common/social_auth_pipeline.py:55
+msgid ""
+"We couldn't find your user. There might be two reasons: either you're not "
+"registered yet, or the email address that we know about doesn't match your "
+"email address in Facebook. Please contact the site administrator to fix this."
+msgstr ""
+"Nem találtuk a felhasználódat. Ez két okból lehet: vagy még nem lettél "
+"regisztrálva, vagy az email címed, amiről tudunk, nem egyezik meg a Facebook-"
+"os email címeddel. Lépj kapcsolatba az oldal adminisztrátorával, hogy "
+"megjavíthassa!"
+
 #: common/templates/common/login.html:5
 msgid "TeamStars login"
-msgstr "TeamStars áttekintés"
+msgstr "TeamStars bejelentkezés"
 
-#: common/templates/common/login.html:19
+#: common/templates/common/login.html:21
+msgid "Log in with your username and password..."
+msgstr "Jelentkezz be felhasználónévvel és jelszóval..."
+
+#: common/templates/common/login.html:29
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: common/templates/common/login.html:23
+#: common/templates/common/login.html:33
 msgid "Password"
 msgstr "Jelszó"
 
-#: common/templates/common/login.html:27
+#: common/templates/common/login.html:37
 msgid "Your username and password didn't match. Please try again."
 msgstr "A felhasználónév / jelszó páros nem stimmel - próbáld újra!"
 
-#: common/templates/common/login.html:30
+#: common/templates/common/login.html:40
 msgid "Login"
 msgstr "Bejelentkezés"
+
+#: common/templates/common/login.html:49
+msgid "...or with Facebook"
+msgstr "...vagy Facebook-kal"
+
+#: common/templates/common/logout.html:5
+msgid "You've successfully logged out"
+msgstr "Sikeresen kijelentkeztél"
+
+#: common/templates/common/logout.html:9
+msgid "Have a nice day!"
+msgstr "Legyen szép napod!"
 
 #: common/templates/common/settings.html:5
 msgid "TeamStars user management"
 msgstr "TeamStars felhasználó kezelés"
 
-#: common/templates/common/settings.html:10 templates/base.html:28
+#: common/templates/common/settings.html:10 templates/base.html:32
 #, python-format
 msgid "Welcome %(username)s!"
 msgstr "Szia %(username)s!"
@@ -96,7 +127,7 @@ msgstr "Szia %(username)s!"
 msgid "Logout"
 msgstr "Kijelentkezés"
 
-#: common/templates/common/settings.html:14 templates/base.html:37
+#: common/templates/common/settings.html:14 templates/base.html:41
 msgid "Login with Facebook"
 msgstr "Bejelentkezés Facebook-kal"
 
@@ -112,15 +143,15 @@ msgstr "Üdv a TeamStars-ban!"
 msgid "TeamStars"
 msgstr "TeamStars"
 
-#: templates/base.html:17
+#: templates/base.html:18
 msgid "Votes"
 msgstr "Szavazatok"
 
-#: templates/base.html:18
+#: templates/base.html:21
 msgid "Calendar"
 msgstr "Naptár"
 
-#: templates/base.html:32
+#: templates/base.html:36
 #, python-format
 msgid "You have %(stars)s stars."
 msgstr "%(stars)s csillagod van."
@@ -159,6 +190,12 @@ msgstr "Útmutató"
 #, python-format
 msgid "Please find the API page <a href=\"%(api_url)s\">here</a>."
 msgstr "Az API oldalt <a href=\"%(api_url)s\">itt találod</a>."
+
+#~ msgid "Event title"
+#~ msgstr "Esemény címe"
+
+#~ msgid "Status"
+#~ msgstr "Állapot"
 
 #~ msgid "Birth date: %(birth_date)s"
 #~ msgstr "Születésnap: %(birth_date)s"
