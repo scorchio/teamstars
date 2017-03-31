@@ -23,9 +23,9 @@ def save_fb_profile(backend, user, response, *args, **kwargs):
             logger.debug('no profile yet, creating one')
             profile = Profile.objects.create(user=user)
 
-        profile.fb_link = response.get('link')
-        profile.birth_date = datetime.strptime(response.get('birthday'), "%m/%d/%Y")
-        profile.location = response.get('location').get('name')
+        profile.fb_link = response.get('link', '')
+        profile.birth_date = datetime.strptime(response.get('birthday', ''), "%m/%d/%Y")
+        profile.location = response.get('location', '').get('name')
         logger.debug('saving FB profile done!')
         profile.save()
 
