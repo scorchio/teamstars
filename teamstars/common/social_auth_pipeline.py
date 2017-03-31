@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 def save_fb_profile(backend, user, response, *args, **kwargs):
+    # TODO: write a test for those
     if backend.name == 'facebook' and user:
         logger.debug('saving FB profile...')
         try:
@@ -24,8 +25,10 @@ def save_fb_profile(backend, user, response, *args, **kwargs):
             profile = Profile.objects.create(user=user)
 
         profile.fb_link = response.get('link', '')
-        profile.birth_date = datetime.strptime(response.get('birthday', ''), "%m/%d/%Y")
-        profile.location = response.get('location', '').get('name')
+        if 'birthday' in response:
+            profile.birth_date = datetime.strptime(response.get('birthday'), "%m/%d/%Y")
+        if 'location' in response:
+            profile.location = response.get('location').get('name', '')
         logger.debug('saving FB profile done!')
         profile.save()
 
