@@ -50,14 +50,19 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
     'social_django',
     'common',
     'votes',
     'calendstar',
     'rest_framework',
+    'telegrambot',
     'debug_toolbar',
 )
+
+SITE_ID = 1
+TELEGRAM_BOT_HANDLERS_CONF = "teamstars.bot_handlers"
 
 
 def votes_enabled():
