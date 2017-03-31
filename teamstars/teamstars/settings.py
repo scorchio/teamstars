@@ -175,10 +175,18 @@ LOGGING = {
         }
     },
     'loggers': {
+        'common': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
         'votes': {
             'handlers': ['console'],
             'level': 'DEBUG',
-        }
+        },
+        'calendstar': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
     }
 }
 
@@ -203,7 +211,7 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
 
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/votes/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 SOCIAL_AUTH_PIPELINE = (
     # Get the information we can about the user and return it in a simple
@@ -255,4 +263,7 @@ SOCIAL_AUTH_PIPELINE = (
 
     # Save profile picture of the user
     'common.social_auth_pipeline.save_profile_picture',
+
+    # Display some useful error message to the user
+    'common.social_auth_pipeline.handle_errors',
 )

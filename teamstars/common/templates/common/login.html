@@ -4,6 +4,16 @@
 
     <h1>{% trans "TeamStars login" %}</h1>
 
+    {% if messages %}
+    <div class="callout alert">
+        <ul>
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
     <div class="row">
         <div class="medium-6 columns">
             <div class="card">

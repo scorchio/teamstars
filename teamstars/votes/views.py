@@ -19,8 +19,3 @@ def add(request):
         'users': User.objects.all(),
     }
     return render(request, 'votes/add.html', context)
-
-
-def logout_view(request):
-    logout(request)
-    return redirect('vote_index')
