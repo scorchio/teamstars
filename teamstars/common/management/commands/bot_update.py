@@ -6,7 +6,7 @@ from telegram import ParseMode
 from telegrambot.models import Bot
 
 
-@kronos.register('/1 * * * *')
+# @kronos.register('/1 * * * *')
 class Command(BaseCommand):
     help = 'Sends updates to Telegram bot.'
 
