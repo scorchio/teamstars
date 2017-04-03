@@ -174,22 +174,42 @@ REST_FRAMEWORK = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+            'datefmt': "%Y-%m-%d %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler'
-        }
+        },
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.environ.get('LOG_PREFIX', '') + 'teamstars.log',
+            'formatter': 'verbose'
+        },
     },
     'loggers': {
+        'django': {
+            'handlers': ['file', 'console'],
+            'propagate': True,
+            'level': 'DEBUG',
+        },
         'common': {
-            'handlers': ['console'],
+            'handlers': ['file', 'console'],
             'level': 'DEBUG',
         },
         'votes': {
-            'handlers': ['console'],
+            'handlers': ['file', 'console'],
             'level': 'DEBUG',
         },
         'calendstar': {
-            'handlers': ['console'],
+            'handlers': ['file', 'console'],
             'level': 'DEBUG',
         },
     }
