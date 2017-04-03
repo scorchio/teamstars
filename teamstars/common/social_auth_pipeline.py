@@ -2,11 +2,9 @@ from datetime import datetime
 from requests import request, HTTPError
 
 from django.contrib import messages
-from django.shortcuts import render_to_response
 from django.utils.translation import ugettext as _
 
 from django.core.files.base import ContentFile
-from social_core.pipeline.partial import partial
 
 from models import Profile
 
