@@ -204,6 +204,10 @@ LOGGING = {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',
         },
+        'teamstars': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+        },
         'votes': {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',
