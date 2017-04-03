@@ -305,4 +305,4 @@ SOCIAL_AUTH_PIPELINE = (
 if 'KRONOS_MANAGE' in os.environ:
     KRONOS_MANAGE = os.environ.get('KRONOS_MANAGE')
 if 'KRONOS_PREFIX' in os.environ:
-    KRONOS_MANAGE = os.environ.get('KRONOS_PREFIX')
+    KRONOS_PREFIX = os.environ.get('KRONOS_PREFIX')
