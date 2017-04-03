@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 class StartView(TemplateCommandView):
     logger.debug("Incoming start view!")
-    template_text = "bot/messages/command_start_text.txt"
+    template_text = "bot_messages/command_start_text.txt"
 
 urlpatterns = [
     command('start', StartView.as_command_view()),
