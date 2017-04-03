@@ -13,13 +13,13 @@ class StartView(TemplateCommandView):
 
 class AuthView(TemplateCommandView):
     template_text = "bot_messages/command_auth_test.txt"
-    context_object_name = "user"
-
-    def get_context(self, bot, update, **kwargs):
-        logging.debug("bot: {json}".format(json=serializers.serialize("json", bot, indent=2)))
-        logging.debug("update: {json}".format(json=serializers.serialize("json", update, indent=2)))
-        context = {self.context_object_name : 'user'}
-        return context
+    # context_object_name = "user"
+    #
+    # def get_context(self, bot, update, **kwargs):
+    #     logging.debug("bot: {json}".format(json=serializers.serialize("json", bot, indent=2)))
+    #     logging.debug("update: {json}".format(json=serializers.serialize("json", update, indent=2)))
+    #     context = {self.context_object_name : 'user'}
+    #     return context
 
 urlpatterns = [
     command('start', StartView.as_command_view()),
