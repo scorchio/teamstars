@@ -216,6 +216,10 @@ LOGGING = {
             'handlers': ['file', 'console'],
             'level': 'DEBUG',
         },
+        'telegrambot': {
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+        },
     }
 }
 
