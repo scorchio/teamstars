@@ -1,3 +1,4 @@
+import datetime
 from django.core.management.base import BaseCommand
 
 import kronos
@@ -11,5 +12,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         bot = Bot.objects.first()
-        bot.send_message(chat_id=70371207, text="I'm still here ^^", reply_markup=None, parse_mode=ParseMode.MARKDOWN)
+        bot.send_message(chat_id=70371207,
+                         text="I'm still here ^^ The time on my end is {time}".format(time=datetime.datetime.now()),
+                         reply_markup=None, parse_mode=ParseMode.MARKDOWN)
 
