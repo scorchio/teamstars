@@ -301,3 +301,6 @@ SOCIAL_AUTH_PIPELINE = (
     # Display some useful error message to the user
     'common.social_auth_pipeline.handle_errors',
 )
+
+if 'KRONOS_MANAGE' in os.environ:
+    KRONOS_MANAGE = os.environ.get('KRONOS_MANAGE')
