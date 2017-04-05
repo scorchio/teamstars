@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'votes',
     'calendstar',
     'rest_framework',
+    'rest_framework.authtoken',
     'debug_toolbar',
 )
 

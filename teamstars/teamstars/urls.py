@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 
 from rest_framework import routers
+from rest_framework.authtoken import views
 
 from serializers import UserViewSet, VoteViewSet, VoteTypeViewSet
 
@@ -21,7 +22,7 @@ urlpatterns = [
    url(r'^$', common_views.index),
    url(r'^admin/', include(admin.site.urls)),
    url(r'^api/', include(router.urls)),
-   url(r'^api-auth/', include('rest_framework.urls')),
+   url(r'^api/token-auth/', views.obtain_auth_token),
    url(r'^user/', include('common.urls')),
    url('', include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
