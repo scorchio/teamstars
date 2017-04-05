@@ -3,7 +3,7 @@ Django==1.8.17
 django-debug-toolbar==1.4
 django-dotenv==1.4.1
 django-model-utils==2.6
-djangorestframework==3.3.3
+djangorestframework==3.6.2
 enum34==1.1.6
 flake8==3.2.1
 mccabe==0.5.2
