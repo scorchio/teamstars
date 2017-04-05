@@ -24,7 +24,6 @@ urlpatterns = [
    url(r'^api-auth/', include('rest_framework.urls')),
    url(r'^user/', include('common.urls')),
    url('', include('social_django.urls', namespace='social')),
-   url(r'^telegrambot/', include('telegrambot.urls', namespace="telegrambot"))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if app_settings.votes_enabled():

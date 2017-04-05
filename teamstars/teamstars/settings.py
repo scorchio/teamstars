@@ -58,12 +58,10 @@ INSTALLED_APPS = (
     'votes',
     'calendstar',
     'rest_framework',
-    'telegrambot',
     'debug_toolbar',
 )
 
 SITE_ID = 1
-TELEGRAM_BOT_HANDLERS_CONF = "teamstars.bot_handlers"
 
 
 def votes_enabled():
