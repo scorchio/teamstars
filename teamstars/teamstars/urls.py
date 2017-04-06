@@ -6,9 +6,7 @@ from django.contrib import admin
 from rest_framework import routers
 from rest_framework.authtoken import views
 
-from serializers import UserViewSet, VoteViewSet, VoteTypeViewSet
-
-from api_views import LeaderboardViewSet
+from api_views import UserViewSet, VoteViewSet, VoteTypeViewSet, LeaderboardViewSet
 from common import views as common_views
 import settings as app_settings
 
@@ -21,8 +19,8 @@ router.register(r'leaderboard', LeaderboardViewSet, base_name='list')
 urlpatterns = [
    url(r'^$', common_views.index),
    url(r'^admin/', include(admin.site.urls)),
-   url(r'^api/', include(router.urls)),
-   url(r'^api/token-auth/', views.obtain_auth_token),
+   url(r'^api/v1/', include(router.urls)),
+   url(r'^api/v1/token-auth/', views.obtain_auth_token),
    url(r'^user/', include('common.urls')),
    url('', include('social_django.urls', namespace='social')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

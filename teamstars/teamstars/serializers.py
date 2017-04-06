@@ -1,19 +1,26 @@
 from django.contrib.auth.models import User
 
-from rest_framework import serializers, viewsets
+from rest_framework import serializers
 
+from common.models import Profile
 from votes.models import Vote, VoteType
 
 
+class UserProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        depth = 1
+        fields = ('fb_link', 'location', 'birth_date', 'photo')
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
+    profile = UserProfileSerializer()
+
     class Meta:
         model = User
-        fields = ('url', 'username', 'email', 'is_staff')
-
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+        fields = ('id', 'username', 'email', 'first_name', 'last_name',
+                  'is_active', 'is_staff', 'date_joined', 'last_login', 'profile')
 
 
 class VoteSerializer(serializers.HyperlinkedModelSerializer):
@@ -28,21 +35,11 @@ class VoteSerializer(serializers.HyperlinkedModelSerializer):
         return data
 
 
-class VoteViewSet(viewsets.ModelViewSet):
-    queryset = Vote.objects.all()
-    serializer_class = VoteSerializer
-
-
 class VoteTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = VoteType
         fields = ('id', 'type', 'sender_points', 'recipient_points', 'created',
                   'modified')
-
-
-class VoteTypeViewSet(viewsets.ModelViewSet):
-    queryset = VoteType.objects.all()
-    serializer_class = VoteTypeSerializer
 
 
 class LeaderboardSerializer(serializers.Serializer):
