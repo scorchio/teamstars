@@ -9,9 +9,11 @@ from rest_framework.authtoken import views
 from api_views import UserViewSet, VoteViewSet, VoteTypeViewSet, LeaderboardViewSet
 from common import views as common_views
 import settings as app_settings
+from calendstar.api_views import CalendarEventViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
+router.register(r'events', CalendarEventViewSet)
 router.register(r'votes', VoteViewSet)
 router.register(r'votes-types', VoteTypeViewSet)
 router.register(r'leaderboard', LeaderboardViewSet, base_name='list')
