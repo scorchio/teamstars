@@ -1,29 +1,20 @@
-from django.contrib.auth.models import User
-
 from rest_framework import serializers
 
-from common.models import Profile
-from votes.models import Vote, VoteType
+from common.api_serializers import UserSerializer
+from votes.models import VoteType, Vote
 
 
-class UserProfileSerializer(serializers.ModelSerializer):
-
+class VoteTypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Profile
-        depth = 1
-        fields = ('fb_link', 'location', 'birth_date', 'photo')
-
-
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    profile = UserProfileSerializer()
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', 'first_name', 'last_name',
-                  'is_active', 'is_staff', 'date_joined', 'last_login', 'profile')
+        model = VoteType
+        fields = ('id', 'type', 'sender_points', 'recipient_points', 'created',
+                  'modified')
 
 
 class VoteSerializer(serializers.HyperlinkedModelSerializer):
+    type = VoteTypeSerializer()
+    sender = UserSerializer()
+    recipient = UserSerializer()
     class Meta:
         model = Vote
         fields = ('id', 'type', 'sender', 'recipient', 'title', 'description',
@@ -33,13 +24,6 @@ class VoteSerializer(serializers.HyperlinkedModelSerializer):
         vote = Vote(**data)
         vote.clean()
         return data
-
-
-class VoteTypeSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = VoteType
-        fields = ('id', 'type', 'sender_points', 'recipient_points', 'created',
-                  'modified')
 
 
 class LeaderboardSerializer(serializers.Serializer):

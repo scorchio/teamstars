@@ -1,15 +1,10 @@
-from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
 
 from votes.models import Vote, VoteType
-from serializers import LeaderboardSerializer, UserSerializer, VoteSerializer, VoteTypeSerializer
+from serializers import LeaderboardSerializer, VoteSerializer, VoteTypeSerializer
 
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
 
 # TODO: This needs to be moved inside votes
 class VoteViewSet(viewsets.ModelViewSet):

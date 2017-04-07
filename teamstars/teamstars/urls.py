@@ -6,8 +6,11 @@ from django.contrib import admin
 from rest_framework import routers
 from rest_framework.authtoken import views
 
-from api_views import UserViewSet, VoteViewSet, VoteTypeViewSet, LeaderboardViewSet
+from api_views import VoteViewSet, VoteTypeViewSet, LeaderboardViewSet
+from common.api_views import UserViewSet
+
 from common import views as common_views
+
 import settings as app_settings
 from calendstar.api_views import CalendarEventViewSet
 

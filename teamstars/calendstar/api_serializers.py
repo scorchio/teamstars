@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from calendstar.models import CalendarEvent
-from teamstars.serializers import UserSerializer
+from common.api_serializers import UserSerializer
 
 
 class CalendarEventSerializer(serializers.ModelSerializer):
