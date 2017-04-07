@@ -6,13 +6,13 @@ from django.contrib import admin
 from rest_framework import routers
 from rest_framework.authtoken import views
 
-from api_views import VoteViewSet, VoteTypeViewSet, LeaderboardViewSet
 from common.api_views import UserViewSet
+from votes.api_views import VoteViewSet, VoteTypeViewSet, LeaderboardViewSet
+from calendstar.api_views import CalendarEventViewSet
 
 from common import views as common_views
 
 import settings as app_settings
-from calendstar.api_views import CalendarEventViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)

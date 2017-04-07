@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from common.api_serializers import UserSerializer
-from votes.models import VoteType, Vote
+from models import VoteType, Vote
 
 
 class VoteTypeSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,6 +15,7 @@ class VoteSerializer(serializers.HyperlinkedModelSerializer):
     type = VoteTypeSerializer()
     sender = UserSerializer()
     recipient = UserSerializer()
+
     class Meta:
         model = Vote
         fields = ('id', 'type', 'sender', 'recipient', 'title', 'description',

@@ -1,14 +1,16 @@
 from rest_framework import viewsets
 from rest_framework import mixins
-from rest_framework.permissions import IsAuthenticated
 
-from votes.models import Vote, VoteType
-from serializers import LeaderboardSerializer, VoteSerializer, VoteTypeSerializer
+from models import Vote, VoteType
+from api_serializers import LeaderboardSerializer, VoteSerializer, VoteTypeSerializer
 
 
-# TODO: This needs to be moved inside votes
 class VoteViewSet(viewsets.ModelViewSet):
-    queryset = Vote.objects.all()
+    queryset = Vote.objects.all().prefetch_related('type',
+                                                   'sender',
+                                                   'recipient',
+                                                   'sender__profile',
+                                                   'recipient__profile')
     serializer_class = VoteSerializer
 
 
@@ -18,7 +20,6 @@ class VoteTypeViewSet(viewsets.ModelViewSet):
 
 
 class LeaderboardViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
-    permission_classes = (IsAuthenticated,)
     serializer_class = LeaderboardSerializer
 
     def get_queryset(self):

@@ -5,5 +5,5 @@ from common.api_serializers import UserSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.all().prefetch_related('profile')
     serializer_class = UserSerializer
