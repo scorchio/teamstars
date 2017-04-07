@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models import Count
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext as _
 from model_utils import Choices
@@ -19,6 +20,18 @@ class CalendarEvent(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    def _get_response_stats(self):
+        return CalendarEventResponse.objects\
+                    .filter(calendar_event=self)\
+                    .values('status').annotate(count=Count('status'))
+
+    response_stats = property(_get_response_stats)
+
+    def _get_responses(self):
+        return CalendarEventResponse.objects.filter(calendar_event=self)
+
+    responses = property(_get_responses)
 
 
 class CalendarEventResponse(StatusModel):
