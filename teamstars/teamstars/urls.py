@@ -8,7 +8,7 @@ from rest_framework.authtoken import views as authtoken_views
 
 from common.api_views import UserViewSet
 from votes.api_views import VoteViewSet, VoteTypeViewSet, LeaderboardViewSet
-from calendstar.api_views import CalendarEventViewSet
+from calendstar.api_views import CalendarEventViewSet, CalendarEventResponseViewSet
 
 from common import views as common_views
 

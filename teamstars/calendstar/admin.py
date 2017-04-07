@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from models import CalendarEvent
+from models import CalendarEvent, CalendarEventResponse
 
 
 class CalendarAdmin(admin.ModelAdmin):
@@ -9,4 +9,9 @@ class CalendarAdmin(admin.ModelAdmin):
     search_fields = ['title']
 
 
+class CalendarEventResponseAdmin(admin.ModelAdmin):
+    list_display = ['user', 'calendar_event', 'status', 'comment']
+
+
 admin.site.register(CalendarEvent, CalendarAdmin)
+admin.site.register(CalendarEventResponse, CalendarEventResponseAdmin)
