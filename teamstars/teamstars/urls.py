@@ -8,7 +8,7 @@ from rest_framework.authtoken import views as authtoken_views
 
 from common.api_views import UserViewSet
 from votes.api_views import VoteViewSet, VoteTypeViewSet, LeaderboardViewSet
-from calendstar.api_views import CalendarEventViewSet, CalendarEventResponseViewSet
+from calendstar.api_views import CalendarEventViewSet, CalendarEventResponseViewSet, CalendarEventMyResponseView
 
 from common import views as common_views
 
@@ -34,6 +34,8 @@ if app_settings.votes_enabled():
 if app_settings.calendar_enabled():
     urlpatterns += [url(r'^calendar/', include('calendstar.urls'))]
     api_router.register(r'events', CalendarEventViewSet)
+    urlpatterns += [url(r'^api/v1/events/(?P<pk>[0-9]+)/responses/mine/$',
+                        CalendarEventMyResponseView.as_view())]
 
 urlpatterns += [
     url(r'^api/v1/', include(api_router.urls)),

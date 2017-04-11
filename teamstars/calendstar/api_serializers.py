@@ -5,7 +5,12 @@ from common.api_serializers import UserSerializer
 
 
 class CalendarEventResponseSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
+    user = UserSerializer(default=serializers.CurrentUserDefault())
+
+    def validate(self, data):
+        if 'calendar_event' not in data:
+            data['calendar_event'] = self.context['event']
+        return data
 
     class Meta:
         model = CalendarEventResponse
