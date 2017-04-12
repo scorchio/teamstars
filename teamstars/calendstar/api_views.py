@@ -24,7 +24,6 @@ class CalendarEventMyResponseView(APIView):
         event = CalendarEvent.objects.get(pk=pk)
         # Need to pass request (for CurrentUserDefault) and event (for the validator) in context to make this work
         event_response = CalendarEventResponse.objects.filter(calendar_event=event, user=request.user).first()
-        print "response is ", event_response
         serializer = CalendarEventResponseSerializer(instance=event_response, data=request.data,
                                                      context={'request': request, 'event': event})
         if serializer.is_valid():
