@@ -48,6 +48,11 @@ class CalendstarTestCase(APITestCase):
             'comment': comment,
         }, format='json')
 
+    def _respond_broken_to_event(self, event_id):
+        return self.client.put('/api/v1/events/{event_id}/responses/mine/'.format(event_id=event_id), {
+            'this': 'is not something we should support',
+        }, format='json')
+
     def test_response_flow(self):
         response = self._respond_to_event(self.event1.id, 'status_yes', 'I think so')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
@@ -65,6 +70,9 @@ class CalendstarTestCase(APITestCase):
         response = self._respond_to_event(self.event1.id, 'status_no', 'Whoops, not yet')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(CalendarEventResponse.objects.count(), 2)
+
+        response = self._respond_broken_to_event(self.event1.id)
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         response = self.client.delete('/api/v1/events/{event_id}/responses/mine/'.format(event_id=self.event1.id))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
