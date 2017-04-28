@@ -4,6 +4,7 @@ from datetime import timedelta
 
 from django.contrib.auth.models import User
 from django.test import TestCase
+
 from calendstar.models import CalendarEvent, CalendarEventResponse
 
 
