@@ -16,6 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = os.environ['DJANGO_SECRET']
 
 DEBUG = os.environ.get('DJANGO_DEBUG', False)
+TEST_RUNNER = 'common.test_runner.NoLoggingTestRunner'
 
 TEMPLATES = [
     {
