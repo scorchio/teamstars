@@ -1,10 +1,11 @@
 from datetime import datetime
-from requests import request, HTTPError
+
+import requests
+from requests import request
 
 from django.contrib import messages
-from django.utils.translation import ugettext as _
-
 from django.core.files.base import ContentFile
+from django.utils.translation import ugettext as _
 
 from models import Profile
 
@@ -13,22 +14,15 @@ logger = logging.getLogger(__name__)
 
 
 def save_fb_profile(backend, user, response, *args, **kwargs):
-    # TODO: write a test for those
     if backend.name == 'facebook' and user:
-        logger.debug('saving FB profile...')
-        try:
-            profile = user.profile
-        except Profile.DoesNotExist:
-            logger.debug('no profile yet, creating one')
-            profile = Profile.objects.create(user=user)
-
-        profile.fb_link = response.get('link', '')
-        if 'birthday' in response:
-            profile.birth_date = datetime.strptime(response.get('birthday'), "%m/%d/%Y")
-        if 'location' in response:
-            profile.location = response.get('location').get('name', '')
-        logger.debug('saving FB profile done!')
-        profile.save()
+        logger.debug('Saving/updating FB profile.')
+        Profile.objects.update_or_create(
+            user=user,
+            defaults={
+                'fb_link': response.get('link'),
+                'birthday': datetime.strptime(response.get('birthday'), "%m/%d/%Y") if 'birthday' in response else None,
+                'location': response.get('location').get('name', '') if 'location' in response else None,
+            })
 
 
 def save_profile_picture(backend, user, response, details,
@@ -37,17 +31,12 @@ def save_profile_picture(backend, user, response, details,
     if backend.name == 'facebook' and user:
         url = 'http://graph.facebook.com/{0}/picture'.format(response['id'])
 
-        try:
-            response = request('GET', url, params={'type': 'large'})
-            response.raise_for_status()
-        except HTTPError:
-            pass
-        else:
+        response = request('GET', url, params={'type': 'large'})
+        if response.status_code == requests.codes.ok:
             profile = user.profile
             profile.photo.delete()
             profile.photo.save('avatar_{0}.jpg'.format(user.id),
-                               ContentFile(response.content))
-            profile.save()
+                               ContentFile(response.content), save=True)
 
 
 def handle_errors(strategy, details, user=None, *args, **kwargs):
