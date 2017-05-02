@@ -107,3 +107,4 @@ teamstars/static/node_modules
 !teamstars/static/dist
 teamstars/media
 teamstars/common/fixtures/drupal_initial.json
+api_testing
