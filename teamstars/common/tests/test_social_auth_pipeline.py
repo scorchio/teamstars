@@ -64,7 +64,7 @@ class SaveFacebookPictureTestCase(TestCase):
     def test_save_picture_flow(self):
         self.assertIsNone(self.user.profile.photo.name)
         save_profile_picture(self.mock_backend, self.user, self.mock_response, None)
-        self.assertEquals(self.user.profile.photo.name, './avatar_{id}.jpg'.format(id=self.user.id))
+        self.assertTrue(self.user.profile.photo.name.startswith('./avatar_{id}'.format(id=self.user.id)), )
 
     @patch('common.social_auth_pipeline.ContentFile')
     def test_save_picture_no_image_yet(self, mock_file):
