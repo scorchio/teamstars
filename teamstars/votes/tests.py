@@ -165,7 +165,7 @@ class VoteTestCase(TestCase):
                             description=self.TEST_DESCRIPTION)
         stats = Vote.objects.vote_statistics()
 
-        self.assertItemsEqual(stats['received'][(6, '+')], [{
+        self.assertItemsEqual(stats['received'][(vote_type.id, '+')], [{
             'user_id': user1.id,
             'username': user1.username,
             'count': 1,
@@ -175,7 +175,7 @@ class VoteTestCase(TestCase):
             'username': user2.username,
             'count': 2,
         }])
-        self.assertItemsEqual(stats['sent'][(6, '+')], [{
+        self.assertItemsEqual(stats['sent'][(vote_type.id, '+')], [{
             'user_id': user1.id,
             'username': user1.username,
             'count': 2,
