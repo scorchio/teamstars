@@ -16,6 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = os.environ['DJANGO_SECRET']
 
 DEBUG = os.environ.get('DJANGO_DEBUG', False)
+TEST_RUNNER = 'common.test_runner.NoLoggingTestRunner'
 
 TEMPLATES = [
     {
@@ -58,6 +59,7 @@ INSTALLED_APPS = (
     'votes',
     'calendstar',
     'rest_framework',
+    'rest_framework.authtoken',
     'debug_toolbar',
 )
 
@@ -163,10 +165,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
 REST_FRAMEWORK = {
-    # Use Django's standard `django.contrib.auth` permissions,
-    # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        #'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
 
@@ -184,7 +188,8 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'class': 'logging.StreamHandler'
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
         },
         'file': {
             'level': 'DEBUG',
@@ -195,7 +200,7 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file'],
             'propagate': True,
             'level': 'DEBUG',
         },
@@ -208,15 +213,15 @@ LOGGING = {
             'level': 'DEBUG',
         },
         'votes': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file'],
             'level': 'DEBUG',
         },
         'calendstar': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file'],
             'level': 'DEBUG',
         },
         'telegrambot': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file'],
             'level': 'DEBUG',
         },
     }

@@ -164,35 +164,25 @@ class VoteTestCase(TestCase):
                             title=self.TEST_TITLE,
                             description=self.TEST_DESCRIPTION)
         stats = Vote.objects.vote_statistics()
-        self.assertDictEqual({
-                'received': {
-                    (vote_type.id, vote_type.type): [
-                        {
-                            'user_id': user2.id,
-                            'username': user2.username,
-                            'count': 2,
-                        },
-                        {
-                            'user_id': user1.id,
-                            'username': user1.username,
-                            'count': 1,
-                        }
-                    ]
-                },
-                'sent': {
-                    (vote_type.id, vote_type.type): [
-                        {
-                            'user_id': user2.id,
-                            'username': user2.username,
-                            'count': 1,
-                        },
-                        {
-                            'user_id': user1.id,
-                            'username': user1.username,
-                            'count': 2,
-                        }
-                    ]
-                }
-            },
-            stats,
-            "The points are not calculated correctly after the third (reverse) vote")
+
+        self.assertItemsEqual(stats['received'][(vote_type.id, '+')], [{
+            'user_id': user1.id,
+            'username': user1.username,
+            'count': 1,
+        },
+        {
+            'user_id': user2.id,
+            'username': user2.username,
+            'count': 2,
+        }])
+        self.assertItemsEqual(stats['sent'][(vote_type.id, '+')], [{
+            'user_id': user1.id,
+            'username': user1.username,
+            'count': 2,
+        },
+        {
+            'user_id': user2.id,
+            'username': user2.username,
+            'count': 1,
+        }])
+
