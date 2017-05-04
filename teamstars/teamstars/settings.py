@@ -7,9 +7,11 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
+import os
+import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -60,6 +62,7 @@ INSTALLED_APPS = (
     'calendstar',
     'rest_framework',
     'rest_framework.authtoken',
+    'raven.contrib.django.raven_compat',
     'debug_toolbar',
 )
 
@@ -309,3 +312,11 @@ if 'KRONOS_MANAGE' in os.environ:
     KRONOS_MANAGE = os.environ.get('KRONOS_MANAGE')
 if 'KRONOS_PREFIX' in os.environ:
     KRONOS_PREFIX = os.environ.get('KRONOS_PREFIX')
+
+git_root = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
+if 'RAVEN_CONFIG_DSN' in os.environ:
+    RAVEN_CONFIG = {
+        'dsn': os.environ.get('RAVEN_CONFIG_DSN'),
+        'release': raven.fetch_git_sha(git_root),
+        'environment': os.environ.get('RAVEN_CONFIG_ENV')
+    }
