@@ -50,3 +50,13 @@ jobs:
       - run:
           name: Deploying
           command: eb deploy teamstars-prod
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only:
+                - circleci-eb-deploy
