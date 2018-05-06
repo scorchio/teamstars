@@ -32,6 +32,13 @@ jobs:
       - store_test_results:
           path: test-reports/
 
+  deploy:
+    working_directory: ~/app
+    docker:
+      - image: circleci/python:2.7.14-stretch-browsers
+    steps:
+      - checkout
+
       - run:
           name: Installing deployment dependencies
           working_directory: /
@@ -39,3 +46,17 @@ jobs:
             sudo apt-get -y -qq update
             sudo apt-get install python-pip python-dev build-essential
             sudo pip install awsebcli --upgrade
+
+      - run:
+          name: Deploying
+          command: eb deploy teamstars-prod
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only:
+                - master-at-some-point-of-time
