@@ -1,0 +1,8 @@
+branch-defaults:
+  master:
+    environment: teamstars-prod
+global:
+  application_name: teamstars-project
+  default_platform: Python 2.7 running on 64bit Amazon Linux/2.6.6
+  default_region: eu-central-1
+  sc: git
