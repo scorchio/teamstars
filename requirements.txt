@@ -1,6 +1,6 @@
 configparser==3.5.0
 coverage==4.3.4
-Django==1.8.17
+Django==2.0.6
 django-debug-toolbar==1.4
 django-dotenv==1.4.1
 django-kronos==1.0.0
